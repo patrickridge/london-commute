@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/patrickridge/london-commute/actions/workflows/ci.yml/badge.svg)](https://github.com/patrickridge/london-commute/actions/workflows/ci.yml)
 
-Live site: LIVE_URL
+Live site: https://london-commute-planner.vercel.app
 
 Pick two stations and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether a Santander Cycle or your own bike would be quicker.
 

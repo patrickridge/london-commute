@@ -16,8 +16,8 @@ const title = "London commute planner";
 const description =
   "Plan a London commute: tube time, whether you'll get a seat, and whether a Santander Cycle would be quicker.";
 
-// metadataBase is filled in automatically on Vercel.
 export const metadata: Metadata = {
+  metadataBase: new URL("https://london-commute-planner.vercel.app"),
   title,
   description,
   openGraph: { title, description, siteName: title, type: "website", locale: "en_GB" },
