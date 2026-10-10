@@ -1,0 +1,6319 @@
+[
+{
+"day": "TWT",
+"from": "Elephant & Castle",
+"to": "Rayners Lane",
+"slot": 26,
+"legs": [
+[
+"Bakerloo",
+"Elephant & Castle",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Rayners Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "West Acton",
+"to": "Chancery Lane",
+"slot": 66,
+"legs": [
+[
+"Central",
+"West Acton",
+"Chancery Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Bounds Green",
+"to": "Upminster",
+"slot": 47,
+"legs": [
+[
+"Piccadilly",
+"Bounds Green",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"Barking",
+"seat"
+],
+[
+"District",
+"Barking",
+"Upminster",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Canons Park",
+"to": "Snaresbrook",
+"slot": 73,
+"legs": [
+[
+"Jubilee",
+"Canons Park",
+"Wembley Park",
+"seat"
+],
+[
+"Metropolitan",
+"Wembley Park",
+"Farringdon",
+"seat"
+],
+[
+"Elizabeth line",
+"Farringdon",
+"Stratford",
+"stand"
+],
+[
+"Central",
+"Stratford",
+"Snaresbrook",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Holland Park",
+"to": "Chalfont & Latimer",
+"slot": 90,
+"legs": [
+[
+"Central",
+"Holland Park",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Chalfont & Latimer",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Bow Road",
+"to": "Willesden Junction",
+"slot": 35,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Bow Road",
+"Whitechapel",
+"stand"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Paddington",
+"stand"
+],
+[
+"Bakerloo",
+"Paddington",
+"Willesden Junction",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Brent Cross",
+"to": "Woodside Park",
+"slot": 70,
+"legs": [
+[
+"Northern",
+"Brent Cross",
+"Woodside Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Heathrow Terminal 4",
+"to": "Bethnal Green",
+"slot": 91,
+"legs": [
+[
+"Elizabeth line",
+"Heathrow Terminal 4",
+"Liverpool Street",
+"seat"
+],
+[
+"Central",
+"Liverpool Street",
+"Bethnal Green",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Ealing Common",
+"to": "Latimer Road",
+"slot": 73,
+"legs": [
+[
+"Piccadilly",
+"Ealing Common",
+"Hammersmith",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Hammersmith",
+"Latimer Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "West Drayton",
+"to": "Covent Garden",
+"slot": 59,
+"legs": [
+[
+"Elizabeth line",
+"West Drayton",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Central",
+"Tottenham Court Road",
+"Holborn",
+"maybe"
+],
+[
+"Piccadilly",
+"Holborn",
+"Covent Garden",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Gloucester Road",
+"to": "Chiswick Park",
+"slot": 44,
+"legs": [
+[
+"District",
+"Gloucester Road",
+"Chiswick Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Charing Cross",
+"to": "West Hampstead",
+"slot": 28,
+"legs": [
+[
+"Bakerloo",
+"Charing Cross",
+"Baker Street",
+"seat"
+],
+[
+"Jubilee",
+"Baker Street",
+"West Hampstead",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Bow Road",
+"to": "Hanger Lane",
+"slot": 83,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Bow Road",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Ealing Broadway",
+"seat"
+],
+[
+"Central",
+"Ealing Broadway",
+"Hanger Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Wembley Central",
+"to": "Shepherd's Bush",
+"slot": 60,
+"legs": [
+[
+"Bakerloo",
+"Wembley Central",
+"Paddington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Central",
+"Notting Hill Gate",
+"Shepherd's Bush",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Southgate",
+"to": "Osterley",
+"slot": 58,
+"legs": [
+[
+"Piccadilly",
+"Southgate",
+"Osterley",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Gloucester Road",
+"to": "Holloway Road",
+"slot": 30,
+"legs": [
+[
+"Piccadilly",
+"Gloucester Road",
+"Holloway Road",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "FRI",
+"from": "London Bridge",
+"to": "Warren Street",
+"slot": 83,
+"legs": [
+[
+"Northern",
+"London Bridge",
+"Warren Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "South Woodford",
+"to": "Langley",
+"slot": 29,
+"legs": [
+[
+"Central",
+"South Woodford",
+"Stratford",
+"stand"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Langley",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Upton Park",
+"to": "Russell Square",
+"slot": 41,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Upton Park",
+"King's Cross St. Pancras",
+"maybe"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Russell Square",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "SUN",
+"from": "North Harrow",
+"to": "Elephant & Castle",
+"slot": 82,
+"legs": [
+[
+"Metropolitan",
+"North Harrow",
+"Baker Street",
+"seat"
+],
+[
+"Bakerloo",
+"Baker Street",
+"Elephant & Castle",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Becontree",
+"to": "Camden Town",
+"slot": 91,
+"legs": [
+[
+"District",
+"Becontree",
+"Bank and Monument",
+"seat"
+],
+[
+"Northern",
+"Bank and Monument",
+"Camden Town",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Marble Arch",
+"to": "North Greenwich",
+"slot": 64,
+"legs": [
+[
+"Central",
+"Marble Arch",
+"Bond Street",
+"maybe"
+],
+[
+"Jubilee",
+"Bond Street",
+"North Greenwich",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "FRI",
+"from": "Tower Hill",
+"to": "Woolwich",
+"slot": 78,
+"legs": [
+[
+"District",
+"Tower Hill",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Woolwich",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Chalk Farm",
+"to": "Kew Gardens",
+"slot": 80,
+"legs": [
+[
+"Northern",
+"Chalk Farm",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Ealing Broadway",
+"seat"
+],
+[
+"District",
+"Ealing Broadway",
+"Kew Gardens",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Brixton",
+"to": "Brent Cross",
+"slot": 59,
+"legs": [
+[
+"Victoria",
+"Brixton",
+"Euston",
+"seat"
+],
+[
+"Northern",
+"Euston",
+"Brent Cross",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Woodside Park",
+"to": "South Wimbledon",
+"slot": 56,
+"legs": [
+[
+"Northern",
+"Woodside Park",
+"South Wimbledon",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Putney Bridge",
+"to": "Northfields",
+"slot": 22,
+"legs": [
+[
+"District",
+"Putney Bridge",
+"Hammersmith",
+"seat"
+],
+[
+"Piccadilly",
+"Hammersmith",
+"Northfields",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Northwood Hills",
+"to": "Finchley Road",
+"slot": 34,
+"legs": [
+[
+"Metropolitan",
+"Northwood Hills",
+"Finchley Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Bow Road",
+"to": "Hatton Cross",
+"slot": 56,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Bow Road",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Heathrow Terminals 2 & 3",
+"maybe"
+],
+[
+"Piccadilly",
+"Heathrow Terminals 2 & 3",
+"Hatton Cross",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Hounslow Central",
+"to": "Reading",
+"slot": 70,
+"legs": [
+[
+"Piccadilly",
+"Hounslow Central",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Elizabeth line",
+"Heathrow Terminals 2 & 3",
+"Reading",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "Tower Hill",
+"to": "Canary Wharf",
+"slot": 41,
+"legs": [
+[
+"District",
+"Tower Hill",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Canary Wharf",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Regent's Park",
+"to": "West Harrow",
+"slot": 55,
+"legs": [
+[
+"Bakerloo",
+"Regent's Park",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"West Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Sloane Square",
+"to": "West Harrow",
+"slot": 55,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Sloane Square",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"West Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Ruislip Gardens",
+"to": "Oakwood",
+"slot": 68,
+"legs": [
+[
+"Central",
+"Ruislip Gardens",
+"Holborn",
+"seat"
+],
+[
+"Piccadilly",
+"Holborn",
+"Oakwood",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Elephant & Castle",
+"to": "Canning Town",
+"slot": 42,
+"legs": [
+[
+"Northern",
+"Elephant & Castle",
+"London Bridge",
+"seat"
+],
+[
+"Jubilee",
+"London Bridge",
+"Canning Town",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "High Street Kensington",
+"to": "Highbury & Islington",
+"slot": 21,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"High Street Kensington",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Victoria",
+"King's Cross St. Pancras",
+"Highbury & Islington",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Golders Green",
+"to": "Kensal Green",
+"slot": 56,
+"legs": [
+[
+"Northern",
+"Golders Green",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Paddington",
+"maybe"
+],
+[
+"Bakerloo",
+"Paddington",
+"Kensal Green",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Eastcote",
+"to": "Russell Square",
+"slot": 88,
+"legs": [
+[
+"Metropolitan",
+"Eastcote",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Russell Square",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Willesden Junction",
+"to": "Mile End",
+"slot": 36,
+"legs": [
+[
+"Bakerloo",
+"Willesden Junction",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Liverpool Street",
+"stand"
+],
+[
+"Central",
+"Liverpool Street",
+"Mile End",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Uxbridge",
+"to": "Borough",
+"slot": 78,
+"legs": [
+[
+"Metropolitan",
+"Uxbridge",
+"Moorgate",
+"seat"
+],
+[
+"Northern",
+"Moorgate",
+"Borough",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "White City",
+"to": "Queensway",
+"slot": 70,
+"legs": [
+[
+"Central",
+"White City",
+"Queensway",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ravenscourt Park",
+"to": "Chorleywood",
+"slot": 81,
+"legs": [
+[
+"District",
+"Ravenscourt Park",
+"Turnham Green",
+"seat"
+],
+[
+"Piccadilly",
+"Turnham Green",
+"Rayners Lane",
+"seat"
+],
+[
+"Metropolitan",
+"Rayners Lane",
+"Chorleywood",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Regent's Park",
+"to": "Brent Cross",
+"slot": 44,
+"legs": [
+[
+"Bakerloo",
+"Regent's Park",
+"Oxford Circus",
+"stand"
+],
+[
+"Victoria",
+"Oxford Circus",
+"Euston",
+"maybe"
+],
+[
+"Northern",
+"Euston",
+"Brent Cross",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Hanwell",
+"to": "South Kensington",
+"slot": 40,
+"legs": [
+[
+"Elizabeth line",
+"Hanwell",
+"Paddington",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"South Kensington",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "MON",
+"from": "North Greenwich",
+"to": "Bond Street",
+"slot": 33,
+"legs": [
+[
+"Jubilee",
+"North Greenwich",
+"Bond Street",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "MON",
+"from": "Wimbledon",
+"to": "Elephant & Castle",
+"slot": 88,
+"legs": [
+[
+"District",
+"Wimbledon",
+"Embankment",
+"seat"
+],
+[
+"Bakerloo",
+"Embankment",
+"Elephant & Castle",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Oval",
+"to": "Bank and Monument",
+"slot": 29,
+"legs": [
+[
+"Northern",
+"Oval",
+"Bank and Monument",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "SUN",
+"from": "Hanwell",
+"to": "Piccadilly Circus",
+"slot": 39,
+"legs": [
+[
+"Elizabeth line",
+"Hanwell",
+"Paddington",
+"stand"
+],
+[
+"Bakerloo",
+"Paddington",
+"Piccadilly Circus",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Hyde Park Corner",
+"to": "Northfields",
+"slot": 66,
+"legs": [
+[
+"Piccadilly",
+"Hyde Park Corner",
+"Northfields",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Custom House",
+"to": "Colliers Wood",
+"slot": 82,
+"legs": [
+[
+"Elizabeth line",
+"Custom House",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Colliers Wood",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Swiss Cottage",
+"to": "Temple",
+"slot": 59,
+"legs": [
+[
+"Jubilee",
+"Swiss Cottage",
+"Westminster",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Westminster",
+"Temple",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "East Putney",
+"to": "Chiswick Park",
+"slot": 63,
+"legs": [
+[
+"District",
+"East Putney",
+"Chiswick Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Kensington (Olympia)",
+"to": "Swiss Cottage",
+"slot": 40,
+"legs": null,
+"overall": null
+},
+{
+"day": "FRI",
+"from": "Baker Street",
+"to": "Hanger Lane",
+"slot": 87,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Baker Street",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Central",
+"Notting Hill Gate",
+"Hanger Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Edgware",
+"to": "West Finchley",
+"slot": 23,
+"legs": [
+[
+"Northern",
+"Edgware",
+"West Finchley",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Waterloo",
+"to": "Liverpool Street",
+"slot": 31,
+"legs": [
+[
+"Northern",
+"Waterloo",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Liverpool Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Kennington",
+"to": "Victoria",
+"slot": 66,
+"legs": [
+[
+"Northern",
+"Kennington",
+"Embankment",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Embankment",
+"Victoria",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Notting Hill Gate",
+"to": "Heathrow Terminal 5",
+"slot": 88,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Heathrow Terminal 5",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Turnpike Lane",
+"to": "Mornington Crescent",
+"slot": 48,
+"legs": [
+[
+"Piccadilly",
+"Turnpike Lane",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Northern",
+"King's Cross St. Pancras",
+"Mornington Crescent",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Green Park",
+"to": "Holborn",
+"slot": 71,
+"legs": [
+[
+"Piccadilly",
+"Green Park",
+"Holborn",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "SAT",
+"from": "Hendon Central",
+"to": "Hainault",
+"slot": 86,
+"legs": [
+[
+"Northern",
+"Hendon Central",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Hainault",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Notting Hill Gate",
+"to": "Barbican",
+"slot": 23,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Barbican",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Knightsbridge",
+"to": "Stonebridge Park",
+"slot": 53,
+"legs": [
+[
+"Piccadilly",
+"Knightsbridge",
+"Piccadilly Circus",
+"maybe"
+],
+[
+"Bakerloo",
+"Piccadilly Circus",
+"Stonebridge Park",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "North Wembley",
+"to": "South Wimbledon",
+"slot": 64,
+"legs": [
+[
+"Bakerloo",
+"North Wembley",
+"Waterloo",
+"seat"
+],
+[
+"Northern",
+"Waterloo",
+"South Wimbledon",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Canary Wharf",
+"to": "Hayes & Harlington",
+"slot": 33,
+"legs": [
+[
+"Elizabeth line",
+"Canary Wharf",
+"Hayes & Harlington",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Stockwell",
+"to": "Greenford",
+"slot": 63,
+"legs": [
+[
+"Victoria",
+"Stockwell",
+"Oxford Circus",
+"seat"
+],
+[
+"Central",
+"Oxford Circus",
+"Greenford",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Temple",
+"to": "Abbey Wood",
+"slot": 81,
+"legs": [
+[
+"District",
+"Temple",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Abbey Wood",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "North Wembley",
+"to": "Cannon Street",
+"slot": 35,
+"legs": [
+[
+"Bakerloo",
+"North Wembley",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Liverpool Street",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Liverpool Street",
+"Cannon Street",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Hainault",
+"to": "Sudbury Town",
+"slot": 42,
+"legs": [
+[
+"Central",
+"Hainault",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Ealing Broadway",
+"stand"
+],
+[
+"District",
+"Ealing Broadway",
+"Ealing Common",
+"seat"
+],
+[
+"Piccadilly",
+"Ealing Common",
+"Sudbury Town",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Newbury Park",
+"to": "Canons Park",
+"slot": 70,
+"legs": [
+[
+"Central",
+"Newbury Park",
+"Liverpool Street",
+"seat"
+],
+[
+"Metropolitan",
+"Liverpool Street",
+"Wembley Park",
+"maybe"
+],
+[
+"Jubilee",
+"Wembley Park",
+"Canons Park",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Regent's Park",
+"to": "Cannon Street",
+"slot": 40,
+"legs": [
+[
+"Bakerloo",
+"Regent's Park",
+"Embankment",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Embankment",
+"Cannon Street",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Debden",
+"to": "Barbican",
+"slot": 39,
+"legs": [
+[
+"Central",
+"Debden",
+"Liverpool Street",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Liverpool Street",
+"Barbican",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Stanmore",
+"to": "Eastcote",
+"slot": 80,
+"legs": [
+[
+"Jubilee",
+"Stanmore",
+"Wembley Park",
+"seat"
+],
+[
+"Metropolitan",
+"Wembley Park",
+"Eastcote",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Northwick Park",
+"to": "Embankment",
+"slot": 90,
+"legs": [
+[
+"Metropolitan",
+"Northwick Park",
+"Baker Street",
+"seat"
+],
+[
+"Bakerloo",
+"Baker Street",
+"Embankment",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Ealing Broadway",
+"to": "Arsenal",
+"slot": 21,
+"legs": [
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Paddington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Arsenal",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Chiswick Park",
+"to": "Warwick Avenue",
+"slot": 37,
+"legs": [
+[
+"District",
+"Chiswick Park",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Paddington",
+"stand"
+],
+[
+"Bakerloo",
+"Paddington",
+"Warwick Avenue",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Green Park",
+"to": "Harold Wood",
+"slot": 23,
+"legs": [
+[
+"Jubilee",
+"Green Park",
+"Bond Street",
+"seat"
+],
+[
+"Elizabeth line",
+"Bond Street",
+"Harold Wood",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Harold Wood",
+"to": "Leicester Square",
+"slot": 84,
+"legs": [
+[
+"Elizabeth line",
+"Harold Wood",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Leicester Square",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Moorgate",
+"to": "Iver",
+"slot": 89,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"Farringdon",
+"seat"
+],
+[
+"Elizabeth line",
+"Farringdon",
+"Iver",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ealing Broadway",
+"to": "Brent Cross",
+"slot": 65,
+"legs": [
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Tottenham Court Road",
+"stand"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Brent Cross",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Vauxhall",
+"to": "Seven Kings",
+"slot": 84,
+"legs": [
+[
+"Victoria",
+"Vauxhall",
+"Oxford Circus",
+"seat"
+],
+[
+"Central",
+"Oxford Circus",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Seven Kings",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Wembley Central",
+"to": "Elephant & Castle",
+"slot": 87,
+"legs": [
+[
+"Bakerloo",
+"Wembley Central",
+"Elephant & Castle",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Arnos Grove",
+"to": "South Kensington",
+"slot": 43,
+"legs": [
+[
+"Piccadilly",
+"Arnos Grove",
+"South Kensington",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Acton Town",
+"to": "Edgware Road",
+"slot": 42,
+"legs": [
+[
+"District",
+"Acton Town",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Paddington",
+"maybe"
+],
+[
+"Bakerloo",
+"Paddington",
+"Edgware Road",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Stratford",
+"to": "Croxley",
+"slot": 91,
+"legs": [
+[
+"Elizabeth line",
+"Stratford",
+"Farringdon",
+"seat"
+],
+[
+"Metropolitan",
+"Farringdon",
+"Croxley",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Moorgate",
+"to": "Victoria",
+"slot": 87,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"Victoria",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Temple",
+"to": "Clapham Common",
+"slot": 91,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Temple",
+"Embankment",
+"seat"
+],
+[
+"Northern",
+"Embankment",
+"Clapham Common",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Hounslow East",
+"to": "Grange Hill",
+"slot": 55,
+"legs": [
+[
+"Piccadilly",
+"Hounslow East",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Elizabeth line",
+"Heathrow Terminals 2 & 3",
+"Stratford",
+"seat"
+],
+[
+"Central",
+"Stratford",
+"Grange Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Chesham",
+"to": "Upminster",
+"slot": 77,
+"legs": [
+[
+"Metropolitan",
+"Chesham",
+"Farringdon",
+"seat"
+],
+[
+"Elizabeth line",
+"Farringdon",
+"Whitechapel",
+"stand"
+],
+[
+"District",
+"Whitechapel",
+"Upminster",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Barbican",
+"to": "Brentwood",
+"slot": 76,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Barbican",
+"Liverpool Street",
+"maybe"
+],
+[
+"Elizabeth line",
+"Liverpool Street",
+"Brentwood",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Twyford",
+"to": "Upton Park",
+"slot": 45,
+"legs": [
+[
+"Elizabeth line",
+"Twyford",
+"Whitechapel",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Whitechapel",
+"Upton Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "King's Cross St. Pancras",
+"to": "Southfields",
+"slot": 85,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"High Street Kensington",
+"seat"
+],
+[
+"District",
+"High Street Kensington",
+"Southfields",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Sudbury Town",
+"to": "Upminster",
+"slot": 51,
+"legs": [
+[
+"Piccadilly",
+"Sudbury Town",
+"Ealing Common",
+"seat"
+],
+[
+"District",
+"Ealing Common",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Whitechapel",
+"stand"
+],
+[
+"District",
+"Whitechapel",
+"Upminster",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Wanstead",
+"to": "Iver",
+"slot": 91,
+"legs": [
+[
+"Central",
+"Wanstead",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Iver",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "South Woodford",
+"to": "East Acton",
+"slot": 73,
+"legs": [
+[
+"Central",
+"South Woodford",
+"East Acton",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Queensway",
+"to": "South Kenton",
+"slot": 60,
+"legs": [
+[
+"Central",
+"Queensway",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Paddington",
+"seat"
+],
+[
+"Bakerloo",
+"Paddington",
+"South Kenton",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Holland Park",
+"to": "Shepherd's Bush Market",
+"slot": 29,
+"legs": [
+[
+"Central",
+"Holland Park",
+"Notting Hill Gate",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Shepherd's Bush Market",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Maida Vale",
+"to": "Custom House",
+"slot": 39,
+"legs": [
+[
+"Bakerloo",
+"Maida Vale",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Custom House",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Oxford Circus",
+"to": "East Putney",
+"slot": 52,
+"legs": [
+[
+"Victoria",
+"Oxford Circus",
+"Victoria",
+"stand"
+],
+[
+"District",
+"Victoria",
+"East Putney",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Stepney Green",
+"to": "Hayes & Harlington",
+"slot": 32,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Stepney Green",
+"Whitechapel",
+"maybe"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Hayes & Harlington",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Tooting Bec",
+"to": "Fairlop",
+"slot": 48,
+"legs": [
+[
+"Northern",
+"Tooting Bec",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Fairlop",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Sloane Square",
+"to": "Uxbridge",
+"slot": 71,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Sloane Square",
+"Baker Street",
+"maybe"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Uxbridge",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Seven Kings",
+"to": "Greenford",
+"slot": 65,
+"legs": [
+[
+"Elizabeth line",
+"Seven Kings",
+"Ealing Broadway",
+"seat"
+],
+[
+"Central",
+"Ealing Broadway",
+"Greenford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Chalk Farm",
+"to": "Oxford Circus",
+"slot": 22,
+"legs": [
+[
+"Northern",
+"Chalk Farm",
+"Warren Street",
+"seat"
+],
+[
+"Victoria",
+"Warren Street",
+"Oxford Circus",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "West Ruislip",
+"to": "St. James's Park",
+"slot": 76,
+"legs": [
+[
+"Central",
+"West Ruislip",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"St. James's Park",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Arnos Grove",
+"to": "Preston Road",
+"slot": 62,
+"legs": [
+[
+"Piccadilly",
+"Arnos Grove",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Preston Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Leytonstone",
+"to": "Upton Park",
+"slot": 28,
+"legs": [
+[
+"Central",
+"Leytonstone",
+"Mile End",
+"stand"
+],
+[
+"Circle / Hammersmith & City",
+"Mile End",
+"Upton Park",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "High Barnet",
+"to": "Chorleywood",
+"slot": 30,
+"legs": [
+[
+"Northern",
+"High Barnet",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Chorleywood",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Kilburn",
+"to": "Becontree",
+"slot": 43,
+"legs": [
+[
+"Jubilee",
+"Kilburn",
+"West Ham",
+"seat"
+],
+[
+"District",
+"West Ham",
+"Becontree",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Dollis Hill",
+"to": "Seven Sisters",
+"slot": 53,
+"legs": [
+[
+"Jubilee",
+"Dollis Hill",
+"Wembley Park",
+"seat"
+],
+[
+"Metropolitan",
+"Wembley Park",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Victoria",
+"King's Cross St. Pancras",
+"Seven Sisters",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Edgware Road",
+"to": "West Acton",
+"slot": 85,
+"legs": [
+[
+"Bakerloo",
+"Edgware Road",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Ealing Broadway",
+"stand"
+],
+[
+"Central",
+"Ealing Broadway",
+"West Acton",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Totteridge & Whetstone",
+"to": "Morden",
+"slot": 31,
+"legs": [
+[
+"Northern",
+"Totteridge & Whetstone",
+"Morden",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Bounds Green",
+"to": "Golders Green",
+"slot": 74,
+"legs": [
+[
+"Piccadilly",
+"Bounds Green",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Northern",
+"King's Cross St. Pancras",
+"Golders Green",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Kenton",
+"to": "Archway",
+"slot": 31,
+"legs": [
+[
+"Bakerloo",
+"Kenton",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Tottenham Court Road",
+"stand"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Archway",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "Kennington",
+"to": "Canning Town",
+"slot": 48,
+"legs": [
+[
+"Northern",
+"Kennington",
+"London Bridge",
+"seat"
+],
+[
+"Jubilee",
+"London Bridge",
+"Canning Town",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Kensington (Olympia)",
+"to": "Custom House",
+"slot": 78,
+"legs": null,
+"overall": null
+},
+{
+"day": "MON",
+"from": "North Ealing",
+"to": "West Ruislip",
+"slot": 73,
+"legs": [
+[
+"Piccadilly",
+"North Ealing",
+"Ealing Common",
+"seat"
+],
+[
+"District",
+"Ealing Common",
+"Ealing Broadway",
+"seat"
+],
+[
+"Central",
+"Ealing Broadway",
+"West Ruislip",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Dollis Hill",
+"to": "Bermondsey",
+"slot": 87,
+"legs": [
+[
+"Jubilee",
+"Dollis Hill",
+"Bermondsey",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Holborn",
+"to": "Clapham South",
+"slot": 40,
+"legs": [
+[
+"Piccadilly",
+"Holborn",
+"Leicester Square",
+"seat"
+],
+[
+"Northern",
+"Leicester Square",
+"Clapham South",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Blackhorse Road",
+"to": "Gloucester Road",
+"slot": 45,
+"legs": [
+[
+"Victoria",
+"Blackhorse Road",
+"Victoria",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Victoria",
+"Gloucester Road",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Maidenhead",
+"to": "Watford",
+"slot": 46,
+"legs": [
+[
+"Elizabeth line",
+"Maidenhead",
+"Paddington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Watford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "South Wimbledon",
+"to": "Turnham Green",
+"slot": 42,
+"legs": [
+[
+"Northern",
+"South Wimbledon",
+"Stockwell",
+"seat"
+],
+[
+"Victoria",
+"Stockwell",
+"Green Park",
+"seat"
+],
+[
+"Piccadilly",
+"Green Park",
+"Turnham Green",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Northfields",
+"to": "Arnos Grove",
+"slot": 52,
+"legs": [
+[
+"Piccadilly",
+"Northfields",
+"Arnos Grove",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Angel",
+"to": "Arnos Grove",
+"slot": 84,
+"legs": [
+[
+"Northern",
+"Angel",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Arnos Grove",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Grange Hill",
+"to": "Uxbridge",
+"slot": 80,
+"legs": [
+[
+"Central",
+"Grange Hill",
+"Liverpool Street",
+"seat"
+],
+[
+"Metropolitan",
+"Liverpool Street",
+"Uxbridge",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "South Wimbledon",
+"to": "Clapham Common",
+"slot": 75,
+"legs": [
+[
+"Northern",
+"South Wimbledon",
+"Clapham Common",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Totteridge & Whetstone",
+"to": "West Ham",
+"slot": 70,
+"legs": [
+[
+"Northern",
+"Totteridge & Whetstone",
+"Moorgate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"West Ham",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Manor House",
+"to": "Harrow-on-the-Hill",
+"slot": 49,
+"legs": [
+[
+"Piccadilly",
+"Manor House",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Harrow-on-the-Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Gunnersbury",
+"to": "East Finchley",
+"slot": 71,
+"legs": [
+[
+"District",
+"Gunnersbury",
+"Ealing Broadway",
+"maybe"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Tottenham Court Road",
+"maybe"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"East Finchley",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Borough",
+"to": "Dollis Hill",
+"slot": 21,
+"legs": [
+[
+"Northern",
+"Borough",
+"London Bridge",
+"seat"
+],
+[
+"Jubilee",
+"London Bridge",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Wembley Park",
+"seat"
+],
+[
+"Jubilee",
+"Wembley Park",
+"Dollis Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Ickenham",
+"to": "Sloane Square",
+"slot": 40,
+"legs": [
+[
+"Piccadilly",
+"Ickenham",
+"South Kensington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"South Kensington",
+"Sloane Square",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Cannon Street",
+"to": "Plaistow",
+"slot": 84,
+"legs": [
+[
+"District",
+"Cannon Street",
+"Plaistow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Ladbroke Grove",
+"to": "Holloway Road",
+"slot": 57,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Ladbroke Grove",
+"King's Cross St. Pancras",
+"maybe"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Holloway Road",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "St. John's Wood",
+"to": "Goldhawk Road",
+"slot": 40,
+"legs": [
+[
+"Jubilee",
+"St. John's Wood",
+"Baker Street",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Baker Street",
+"Goldhawk Road",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "South Wimbledon",
+"to": "Acton Main Line",
+"slot": 53,
+"legs": [
+[
+"Northern",
+"South Wimbledon",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Acton Main Line",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Mornington Crescent",
+"to": "West Hampstead",
+"slot": 61,
+"legs": [
+[
+"Northern",
+"Mornington Crescent",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Finchley Road",
+"seat"
+],
+[
+"Jubilee",
+"Finchley Road",
+"West Hampstead",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Barons Court",
+"to": "Manor Park",
+"slot": 47,
+"legs": [
+[
+"District",
+"Barons Court",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Manor Park",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Golders Green",
+"to": "Abbey Wood",
+"slot": 62,
+"legs": [
+[
+"Northern",
+"Golders Green",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Abbey Wood",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Canning Town",
+"to": "Sudbury Hill",
+"slot": 55,
+"legs": [
+[
+"Jubilee",
+"Canning Town",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Rayners Lane",
+"seat"
+],
+[
+"Piccadilly",
+"Rayners Lane",
+"Sudbury Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Hainault",
+"to": "Hounslow East",
+"slot": 84,
+"legs": [
+[
+"Central",
+"Hainault",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Piccadilly",
+"Heathrow Terminals 2 & 3",
+"Hounslow East",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Acton Town",
+"to": "Chalfont & Latimer",
+"slot": 53,
+"legs": [
+[
+"Piccadilly",
+"Acton Town",
+"Rayners Lane",
+"seat"
+],
+[
+"Metropolitan",
+"Rayners Lane",
+"Chalfont & Latimer",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Chadwell Heath",
+"to": "East Putney",
+"slot": 71,
+"legs": [
+[
+"Elizabeth line",
+"Chadwell Heath",
+"Paddington",
+"seat"
+],
+[
+"District",
+"Paddington",
+"East Putney",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Belsize Park",
+"to": "Ravenscourt Park",
+"slot": 22,
+"legs": [
+[
+"Northern",
+"Belsize Park",
+"Warren Street",
+"seat"
+],
+[
+"Victoria",
+"Warren Street",
+"Victoria",
+"seat"
+],
+[
+"District",
+"Victoria",
+"Ravenscourt Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Maida Vale",
+"to": "Highbury & Islington",
+"slot": 30,
+"legs": [
+[
+"Bakerloo",
+"Maida Vale",
+"Oxford Circus",
+"seat"
+],
+[
+"Victoria",
+"Oxford Circus",
+"Highbury & Islington",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Waterloo",
+"to": "Embankment",
+"slot": 69,
+"legs": [
+[
+"Bakerloo",
+"Waterloo",
+"Embankment",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Moorgate",
+"to": "Totteridge & Whetstone",
+"slot": 39,
+"legs": [
+[
+"Northern",
+"Moorgate",
+"Totteridge & Whetstone",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Eastcote",
+"to": "Bermondsey",
+"slot": 85,
+"legs": [
+[
+"Metropolitan",
+"Eastcote",
+"Baker Street",
+"seat"
+],
+[
+"Jubilee",
+"Baker Street",
+"Bermondsey",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Shepherd's Bush Market",
+"to": "Twyford",
+"slot": 37,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Shepherd's Bush Market",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Twyford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Twyford",
+"to": "Wimbledon Park",
+"slot": 22,
+"legs": [
+[
+"Elizabeth line",
+"Twyford",
+"Paddington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"High Street Kensington",
+"seat"
+],
+[
+"District",
+"High Street Kensington",
+"Wimbledon Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "High Barnet",
+"to": "Cannon Street",
+"slot": 23,
+"legs": null,
+"overall": null
+},
+{
+"day": "MON",
+"from": "Ealing Common",
+"to": "Old Street",
+"slot": 33,
+"legs": [
+[
+"District",
+"Ealing Common",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Tottenham Court Road",
+"stand"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Old Street",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Southfields",
+"to": "Westminster",
+"slot": 26,
+"legs": [
+[
+"District",
+"Southfields",
+"Westminster",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Arnos Grove",
+"to": "Wembley Central",
+"slot": 51,
+"legs": [
+[
+"Piccadilly",
+"Arnos Grove",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"Paddington",
+"stand"
+],
+[
+"Bakerloo",
+"Paddington",
+"Wembley Central",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Kensington (Olympia)",
+"to": "Acton Main Line",
+"slot": 78,
+"legs": null,
+"overall": null
+},
+{
+"day": "SUN",
+"from": "Buckhurst Hill",
+"to": "Turnpike Lane",
+"slot": 88,
+"legs": [
+[
+"Central",
+"Buckhurst Hill",
+"Holborn",
+"seat"
+],
+[
+"Piccadilly",
+"Holborn",
+"Turnpike Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Warwick Avenue",
+"to": "Brixton",
+"slot": 80,
+"legs": [
+[
+"Bakerloo",
+"Warwick Avenue",
+"Oxford Circus",
+"seat"
+],
+[
+"Victoria",
+"Oxford Circus",
+"Brixton",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Caledonian Road",
+"to": "Kensington (Olympia)",
+"slot": 50,
+"legs": null,
+"overall": null
+},
+{
+"day": "SAT",
+"from": "Hanger Lane",
+"to": "High Street Kensington",
+"slot": 78,
+"legs": [
+[
+"Central",
+"Hanger Lane",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"High Street Kensington",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Plaistow",
+"to": "Camden Town",
+"slot": 81,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Plaistow",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Northern",
+"King's Cross St. Pancras",
+"Camden Town",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Langley",
+"to": "Bethnal Green",
+"slot": 45,
+"legs": [
+[
+"Elizabeth line",
+"Langley",
+"Liverpool Street",
+"seat"
+],
+[
+"Central",
+"Liverpool Street",
+"Bethnal Green",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Edgware",
+"to": "Neasden",
+"slot": 52,
+"legs": [
+[
+"Northern",
+"Edgware",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Wembley Park",
+"seat"
+],
+[
+"Jubilee",
+"Wembley Park",
+"Neasden",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Maida Vale",
+"to": "Wimbledon",
+"slot": 37,
+"legs": [
+[
+"Bakerloo",
+"Maida Vale",
+"Paddington",
+"seat"
+],
+[
+"District",
+"Paddington",
+"Wimbledon",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Taplow",
+"to": "Brent Cross",
+"slot": 82,
+"legs": [
+[
+"Elizabeth line",
+"Taplow",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Brent Cross",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Chesham",
+"to": "Hatton Cross",
+"slot": 82,
+"legs": [
+[
+"Metropolitan",
+"Chesham",
+"Rayners Lane",
+"seat"
+],
+[
+"Piccadilly",
+"Rayners Lane",
+"Hatton Cross",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Vauxhall",
+"to": "Lancaster Gate",
+"slot": 79,
+"legs": [
+[
+"Victoria",
+"Vauxhall",
+"Oxford Circus",
+"seat"
+],
+[
+"Central",
+"Oxford Circus",
+"Lancaster Gate",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Stanmore",
+"to": "Covent Garden",
+"slot": 90,
+"legs": [
+[
+"Jubilee",
+"Stanmore",
+"Wembley Park",
+"seat"
+],
+[
+"Metropolitan",
+"Wembley Park",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Covent Garden",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Mansion House",
+"to": "Cannon Street",
+"slot": 80,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Mansion House",
+"Cannon Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Latimer Road",
+"to": "St. James's Park",
+"slot": 29,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Latimer Road",
+"St. James's Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Upminster",
+"to": "Southall",
+"slot": 54,
+"legs": [
+[
+"District",
+"Upminster",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Southall",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Harlesden",
+"to": "Caledonian Road",
+"slot": 31,
+"legs": [
+[
+"Bakerloo",
+"Harlesden",
+"Edgware Road",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Edgware Road",
+"King's Cross St. Pancras",
+"stand"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Caledonian Road",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Warren Street",
+"to": "Kensal Green",
+"slot": 66,
+"legs": [
+[
+"Victoria",
+"Warren Street",
+"Oxford Circus",
+"maybe"
+],
+[
+"Bakerloo",
+"Oxford Circus",
+"Kensal Green",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "TWT",
+"from": "Upminster Bridge",
+"to": "Knightsbridge",
+"slot": 34,
+"legs": [
+[
+"District",
+"Upminster Bridge",
+"West Ham",
+"seat"
+],
+[
+"Jubilee",
+"West Ham",
+"Green Park",
+"stand"
+],
+[
+"Piccadilly",
+"Green Park",
+"Knightsbridge",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Oval",
+"to": "High Street Kensington",
+"slot": 83,
+"legs": [
+[
+"Northern",
+"Oval",
+"Embankment",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Embankment",
+"High Street Kensington",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ravenscourt Park",
+"to": "Balham",
+"slot": 40,
+"legs": [
+[
+"District",
+"Ravenscourt Park",
+"Victoria",
+"seat"
+],
+[
+"Victoria",
+"Victoria",
+"Stockwell",
+"seat"
+],
+[
+"Northern",
+"Stockwell",
+"Balham",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Tottenham Court Road",
+"to": "Southall",
+"slot": 71,
+"legs": [
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Southall",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "East Ham",
+"to": "Ruislip Manor",
+"slot": 64,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"East Ham",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Ruislip Manor",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Maryland",
+"to": "Croxley",
+"slot": 62,
+"legs": [
+[
+"Elizabeth line",
+"Maryland",
+"Farringdon",
+"maybe"
+],
+[
+"Metropolitan",
+"Farringdon",
+"Croxley",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "MON",
+"from": "Moorgate",
+"to": "North Ealing",
+"slot": 70,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"Farringdon",
+"stand"
+],
+[
+"Elizabeth line",
+"Farringdon",
+"Ealing Broadway",
+"stand"
+],
+[
+"District",
+"Ealing Broadway",
+"Ealing Common",
+"seat"
+],
+[
+"Piccadilly",
+"Ealing Common",
+"North Ealing",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Greenford",
+"to": "Amersham",
+"slot": 57,
+"legs": [
+[
+"Central",
+"Greenford",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Amersham",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Parsons Green",
+"to": "Brixton",
+"slot": 70,
+"legs": [
+[
+"District",
+"Parsons Green",
+"Victoria",
+"maybe"
+],
+[
+"Victoria",
+"Victoria",
+"Brixton",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Camden Town",
+"to": "Old Street",
+"slot": 74,
+"legs": [
+[
+"Northern",
+"Camden Town",
+"Old Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Kilburn Park",
+"to": "Blackfriars",
+"slot": 55,
+"legs": [
+[
+"Bakerloo",
+"Kilburn Park",
+"Embankment",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Embankment",
+"Blackfriars",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Bond Street",
+"to": "Lancaster Gate",
+"slot": 39,
+"legs": [
+[
+"Central",
+"Bond Street",
+"Lancaster Gate",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Kentish Town",
+"to": "South Ealing",
+"slot": 85,
+"legs": [
+[
+"Northern",
+"Kentish Town",
+"Leicester Square",
+"seat"
+],
+[
+"Piccadilly",
+"Leicester Square",
+"South Ealing",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Grange Hill",
+"to": "Perivale",
+"slot": 74,
+"legs": [
+[
+"Central",
+"Grange Hill",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Ealing Broadway",
+"maybe"
+],
+[
+"Central",
+"Ealing Broadway",
+"Perivale",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Redbridge",
+"to": "West Ruislip",
+"slot": 90,
+"legs": [
+[
+"Central",
+"Redbridge",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Ealing Broadway",
+"seat"
+],
+[
+"Central",
+"Ealing Broadway",
+"West Ruislip",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Canary Wharf",
+"to": "Blackhorse Road",
+"slot": 72,
+"legs": [
+[
+"Elizabeth line",
+"Canary Wharf",
+"Farringdon",
+"stand"
+],
+[
+"Circle / Hammersmith & City",
+"Farringdon",
+"King's Cross St. Pancras",
+"stand"
+],
+[
+"Victoria",
+"King's Cross St. Pancras",
+"Blackhorse Road",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "East Acton",
+"to": "Lancaster Gate",
+"slot": 82,
+"legs": [
+[
+"Central",
+"East Acton",
+"Lancaster Gate",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "West Harrow",
+"to": "Debden",
+"slot": 41,
+"legs": [
+[
+"Metropolitan",
+"West Harrow",
+"Liverpool Street",
+"seat"
+],
+[
+"Central",
+"Liverpool Street",
+"Debden",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ruislip Gardens",
+"to": "North Harrow",
+"slot": 56,
+"legs": [
+[
+"Central",
+"Ruislip Gardens",
+"Notting Hill Gate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"North Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ickenham",
+"to": "Kennington",
+"slot": 71,
+"legs": [
+[
+"Metropolitan",
+"Ickenham",
+"Baker Street",
+"seat"
+],
+[
+"Jubilee",
+"Baker Street",
+"Waterloo",
+"maybe"
+],
+[
+"Northern",
+"Waterloo",
+"Kennington",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Holborn",
+"to": "Loughton",
+"slot": 81,
+"legs": [
+[
+"Central",
+"Holborn",
+"Loughton",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "FRI",
+"from": "Ravenscourt Park",
+"to": "Croxley",
+"slot": 41,
+"legs": [
+[
+"District",
+"Ravenscourt Park",
+"Turnham Green",
+"seat"
+],
+[
+"Piccadilly",
+"Turnham Green",
+"Rayners Lane",
+"seat"
+],
+[
+"Metropolitan",
+"Rayners Lane",
+"Croxley",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Euston Square",
+"to": "Caledonian Road",
+"slot": 46,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Euston Square",
+"King's Cross St. Pancras",
+"maybe"
+],
+[
+"Piccadilly",
+"King's Cross St. Pancras",
+"Caledonian Road",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "FRI",
+"from": "Tower Hill",
+"to": "West Harrow",
+"slot": 48,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Tower Hill",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"West Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Newbury Park",
+"to": "Southall",
+"slot": 74,
+"legs": [
+[
+"Central",
+"Newbury Park",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Southall",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "West Hampstead",
+"to": "Great Portland Street",
+"slot": 51,
+"legs": [
+[
+"Jubilee",
+"West Hampstead",
+"Finchley Road",
+"seat"
+],
+[
+"Metropolitan",
+"Finchley Road",
+"Great Portland Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Fulham Broadway",
+"to": "North Harrow",
+"slot": 91,
+"legs": [
+[
+"District",
+"Fulham Broadway",
+"Edgware Road",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Edgware Road",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"North Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Mile End",
+"to": "Holborn",
+"slot": 67,
+"legs": [
+[
+"Central",
+"Mile End",
+"Holborn",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Wimbledon Park",
+"to": "Hammersmith",
+"slot": 22,
+"legs": [
+[
+"District",
+"Wimbledon Park",
+"Hammersmith",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Ruislip",
+"to": "Preston Road",
+"slot": 72,
+"legs": [
+[
+"Metropolitan",
+"Ruislip",
+"Preston Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Warren Street",
+"to": "Harlesden",
+"slot": 68,
+"legs": [
+[
+"Victoria",
+"Warren Street",
+"Oxford Circus",
+"maybe"
+],
+[
+"Bakerloo",
+"Oxford Circus",
+"Harlesden",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "TWT",
+"from": "North Ealing",
+"to": "Brent Cross",
+"slot": 83,
+"legs": [
+[
+"Piccadilly",
+"North Ealing",
+"Ealing Common",
+"seat"
+],
+[
+"District",
+"Ealing Common",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Brent Cross",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Woodford",
+"to": "Old Street",
+"slot": 36,
+"legs": [
+[
+"Central",
+"Woodford",
+"Bank and Monument",
+"maybe"
+],
+[
+"Northern",
+"Bank and Monument",
+"Old Street",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Turnpike Lane",
+"to": "Waterloo",
+"slot": 47,
+"legs": [
+[
+"Piccadilly",
+"Turnpike Lane",
+"Leicester Square",
+"seat"
+],
+[
+"Northern",
+"Leicester Square",
+"Waterloo",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Kew Gardens",
+"to": "Hounslow East",
+"slot": 69,
+"legs": [
+[
+"District",
+"Kew Gardens",
+"Turnham Green",
+"maybe"
+],
+[
+"Piccadilly",
+"Turnham Green",
+"Hounslow East",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "South Wimbledon",
+"to": "Slough",
+"slot": 59,
+"legs": [
+[
+"Northern",
+"South Wimbledon",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Slough",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "Baker Street",
+"to": "Debden",
+"slot": 24,
+"legs": [
+[
+"Jubilee",
+"Baker Street",
+"Bond Street",
+"seat"
+],
+[
+"Central",
+"Bond Street",
+"Debden",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Stratford",
+"to": "Tooting Broadway",
+"slot": 20,
+"legs": null,
+"overall": null
+},
+{
+"day": "MON",
+"from": "Queensway",
+"to": "Waterloo",
+"slot": 79,
+"legs": [
+[
+"Central",
+"Queensway",
+"Bond Street",
+"seat"
+],
+[
+"Jubilee",
+"Bond Street",
+"Waterloo",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Hounslow East",
+"to": "Clapham North",
+"slot": 48,
+"legs": [
+[
+"Piccadilly",
+"Hounslow East",
+"Green Park",
+"seat"
+],
+[
+"Victoria",
+"Green Park",
+"Stockwell",
+"maybe"
+],
+[
+"Northern",
+"Stockwell",
+"Clapham North",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Elephant & Castle",
+"to": "Wanstead",
+"slot": 33,
+"legs": [
+[
+"Northern",
+"Elephant & Castle",
+"Bank and Monument",
+"stand"
+],
+[
+"Central",
+"Bank and Monument",
+"Wanstead",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "St. James's Park",
+"to": "Cannon Street",
+"slot": 90,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"St. James's Park",
+"Cannon Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Becontree",
+"to": "Abbey Wood",
+"slot": 36,
+"legs": [
+[
+"District",
+"Becontree",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Abbey Wood",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Wimbledon Park",
+"to": "Bayswater",
+"slot": 58,
+"legs": [
+[
+"District",
+"Wimbledon Park",
+"Bayswater",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Hounslow West",
+"to": "Waterloo",
+"slot": 75,
+"legs": [
+[
+"Piccadilly",
+"Hounslow West",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Elizabeth line",
+"Heathrow Terminals 2 & 3",
+"Bond Street",
+"seat"
+],
+[
+"Jubilee",
+"Bond Street",
+"Waterloo",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Cockfosters",
+"to": "Chesham",
+"slot": 29,
+"legs": [
+[
+"Piccadilly",
+"Cockfosters",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Chesham",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Warren Street",
+"to": "Great Portland Street",
+"slot": 69,
+"legs": [
+[
+"Northern",
+"Warren Street",
+"King's Cross St. Pancras",
+"stand"
+],
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"Great Portland Street",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Heathrow Terminal 5",
+"to": "Abbey Wood",
+"slot": 21,
+"legs": null,
+"overall": null
+},
+{
+"day": "FRI",
+"from": "Loughton",
+"to": "St. John's Wood",
+"slot": 55,
+"legs": [
+[
+"Central",
+"Loughton",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Bond Street",
+"maybe"
+],
+[
+"Jubilee",
+"Bond Street",
+"St. John's Wood",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Holloway Road",
+"to": "Sudbury Hill",
+"slot": 87,
+"legs": [
+[
+"Piccadilly",
+"Holloway Road",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Rayners Lane",
+"seat"
+],
+[
+"Piccadilly",
+"Rayners Lane",
+"Sudbury Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "West Hampstead",
+"to": "Hounslow Central",
+"slot": 23,
+"legs": [
+[
+"Jubilee",
+"West Hampstead",
+"Bond Street",
+"seat"
+],
+[
+"Elizabeth line",
+"Bond Street",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Piccadilly",
+"Heathrow Terminals 2 & 3",
+"Hounslow Central",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Manor House",
+"to": "Boston Manor",
+"slot": 22,
+"legs": [
+[
+"Piccadilly",
+"Manor House",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"Hammersmith",
+"seat"
+],
+[
+"Piccadilly",
+"Hammersmith",
+"Boston Manor",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Tufnell Park",
+"to": "Seven Kings",
+"slot": 30,
+"legs": [
+[
+"Northern",
+"Tufnell Park",
+"Tottenham Court Road",
+"stand"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Seven Kings",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "TWT",
+"from": "Hendon Central",
+"to": "Shenfield",
+"slot": 67,
+"legs": [
+[
+"Northern",
+"Hendon Central",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Shenfield",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Tottenham Hale",
+"to": "Barons Court",
+"slot": 63,
+"legs": [
+[
+"Victoria",
+"Tottenham Hale",
+"Green Park",
+"seat"
+],
+[
+"Piccadilly",
+"Green Park",
+"Barons Court",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Seven Kings",
+"to": "Osterley",
+"slot": 70,
+"legs": [
+[
+"Elizabeth line",
+"Seven Kings",
+"Ealing Broadway",
+"seat"
+],
+[
+"District",
+"Ealing Broadway",
+"Acton Town",
+"seat"
+],
+[
+"Piccadilly",
+"Acton Town",
+"Osterley",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Aldgate",
+"to": "Leicester Square",
+"slot": 84,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Aldgate",
+"Liverpool Street",
+"seat"
+],
+[
+"Elizabeth line",
+"Liverpool Street",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Leicester Square",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Hanger Lane",
+"to": "Totteridge & Whetstone",
+"slot": 45,
+"legs": [
+[
+"Central",
+"Hanger Lane",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Tottenham Court Road",
+"stand"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Totteridge & Whetstone",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Green Park",
+"to": "High Street Kensington",
+"slot": 79,
+"legs": [
+[
+"Piccadilly",
+"Green Park",
+"Gloucester Road",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Gloucester Road",
+"High Street Kensington",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Kensington (Olympia)",
+"to": "Leytonstone",
+"slot": 33,
+"legs": null,
+"overall": null
+},
+{
+"day": "FRI",
+"from": "Totteridge & Whetstone",
+"to": "Goodge Street",
+"slot": 48,
+"legs": [
+[
+"Northern",
+"Totteridge & Whetstone",
+"Goodge Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ruislip Manor",
+"to": "Boston Manor",
+"slot": 38,
+"legs": [
+[
+"Piccadilly",
+"Ruislip Manor",
+"Boston Manor",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Borough",
+"to": "Harrow & Wealdstone",
+"slot": 23,
+"legs": [
+[
+"Northern",
+"Borough",
+"Charing Cross",
+"seat"
+],
+[
+"Bakerloo",
+"Charing Cross",
+"Harrow & Wealdstone",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "East Ham",
+"to": "Ruislip Gardens",
+"slot": 26,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"East Ham",
+"Whitechapel",
+"stand"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Ealing Broadway",
+"stand"
+],
+[
+"Central",
+"Ealing Broadway",
+"Ruislip Gardens",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Bow Road",
+"to": "Goldhawk Road",
+"slot": 70,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Bow Road",
+"Goldhawk Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Marble Arch",
+"to": "Cockfosters",
+"slot": 30,
+"legs": [
+[
+"Central",
+"Marble Arch",
+"Holborn",
+"maybe"
+],
+[
+"Piccadilly",
+"Holborn",
+"Cockfosters",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Mornington Crescent",
+"to": "Grange Hill",
+"slot": 43,
+"legs": [
+[
+"Northern",
+"Mornington Crescent",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Grange Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Warren Street",
+"to": "Stepney Green",
+"slot": 24,
+"legs": [
+[
+"Northern",
+"Warren Street",
+"Moorgate",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"Stepney Green",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Pimlico",
+"to": "Perivale",
+"slot": 62,
+"legs": [
+[
+"Victoria",
+"Pimlico",
+"Oxford Circus",
+"seat"
+],
+[
+"Central",
+"Oxford Circus",
+"Perivale",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Finchley Road",
+"to": "Clapham North",
+"slot": 20,
+"legs": null,
+"overall": null
+},
+{
+"day": "MON",
+"from": "Knightsbridge",
+"to": "Canary Wharf",
+"slot": 64,
+"legs": [
+[
+"Piccadilly",
+"Knightsbridge",
+"Green Park",
+"maybe"
+],
+[
+"Jubilee",
+"Green Park",
+"Canary Wharf",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "TWT",
+"from": "Dagenham East",
+"to": "Whitechapel",
+"slot": 46,
+"legs": [
+[
+"District",
+"Dagenham East",
+"Whitechapel",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Notting Hill Gate",
+"to": "Manor Park",
+"slot": 75,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Notting Hill Gate",
+"Paddington",
+"seat"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Manor Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Blackhorse Road",
+"to": "Stratford",
+"slot": 45,
+"legs": [
+[
+"Victoria",
+"Blackhorse Road",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"King's Cross St. Pancras",
+"Farringdon",
+"seat"
+],
+[
+"Elizabeth line",
+"Farringdon",
+"Stratford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "West Ealing",
+"to": "South Wimbledon",
+"slot": 44,
+"legs": [
+[
+"Elizabeth line",
+"West Ealing",
+"Tottenham Court Road",
+"maybe"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"South Wimbledon",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Oval",
+"to": "Stratford",
+"slot": 23,
+"legs": [
+[
+"Northern",
+"Oval",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Stratford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Royal Oak",
+"to": "Hounslow Central",
+"slot": 71,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Royal Oak",
+"Hammersmith",
+"maybe"
+],
+[
+"Piccadilly",
+"Hammersmith",
+"Hounslow Central",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Piccadilly Circus",
+"to": "Barons Court",
+"slot": 79,
+"legs": [
+[
+"Piccadilly",
+"Piccadilly Circus",
+"Barons Court",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Brent Cross",
+"to": "Ilford",
+"slot": 44,
+"legs": [
+[
+"Northern",
+"Brent Cross",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Ilford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Brentwood",
+"to": "North Ealing",
+"slot": 66,
+"legs": [
+[
+"Elizabeth line",
+"Brentwood",
+"Ealing Broadway",
+"seat"
+],
+[
+"District",
+"Ealing Broadway",
+"Ealing Common",
+"seat"
+],
+[
+"Piccadilly",
+"Ealing Common",
+"North Ealing",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Nine Elms",
+"to": "Bermondsey",
+"slot": 53,
+"legs": [
+[
+"Northern",
+"Nine Elms",
+"London Bridge",
+"seat"
+],
+[
+"Jubilee",
+"London Bridge",
+"Bermondsey",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Marylebone",
+"to": "King's Cross St. Pancras",
+"slot": 58,
+"legs": [
+[
+"Bakerloo",
+"Marylebone",
+"Baker Street",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Baker Street",
+"King's Cross St. Pancras",
+"maybe"
+]
+],
+"overall": "maybe"
+},
+{
+"day": "MON",
+"from": "Brixton",
+"to": "Balham",
+"slot": 49,
+"legs": [
+[
+"Victoria",
+"Brixton",
+"Stockwell",
+"seat"
+],
+[
+"Northern",
+"Stockwell",
+"Balham",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Sudbury Hill",
+"to": "Stanmore",
+"slot": 69,
+"legs": [
+[
+"Piccadilly",
+"Sudbury Hill",
+"Rayners Lane",
+"seat"
+],
+[
+"Metropolitan",
+"Rayners Lane",
+"Wembley Park",
+"seat"
+],
+[
+"Jubilee",
+"Wembley Park",
+"Stanmore",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Hounslow West",
+"to": "Sloane Square",
+"slot": 83,
+"legs": [
+[
+"Piccadilly",
+"Hounslow West",
+"South Kensington",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"South Kensington",
+"Sloane Square",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Tower Hill",
+"to": "Golders Green",
+"slot": 21,
+"legs": null,
+"overall": null
+},
+{
+"day": "SUN",
+"from": "Maida Vale",
+"to": "Elephant & Castle",
+"slot": 50,
+"legs": [
+[
+"Bakerloo",
+"Maida Vale",
+"Elephant & Castle",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Mile End",
+"to": "St. John's Wood",
+"slot": 66,
+"legs": [
+[
+"Central",
+"Mile End",
+"Bond Street",
+"maybe"
+],
+[
+"Jubilee",
+"Bond Street",
+"St. John's Wood",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "Canada Water",
+"to": "Upton Park",
+"slot": 45,
+"legs": [
+[
+"Jubilee",
+"Canada Water",
+"West Ham",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"West Ham",
+"Upton Park",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Euston",
+"to": "Hounslow Central",
+"slot": 72,
+"legs": [
+[
+"Victoria",
+"Euston",
+"Green Park",
+"maybe"
+],
+[
+"Piccadilly",
+"Green Park",
+"Hounslow Central",
+"stand"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Barons Court",
+"to": "Taplow",
+"slot": 90,
+"legs": [
+[
+"District",
+"Barons Court",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Taplow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Moorgate",
+"to": "Euston Square",
+"slot": 74,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Moorgate",
+"Euston Square",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Burnham",
+"to": "Kensington (Olympia)",
+"slot": 30,
+"legs": null,
+"overall": null
+},
+{
+"day": "TWT",
+"from": "Charing Cross",
+"to": "Seven Kings",
+"slot": 83,
+"legs": [
+[
+"Northern",
+"Charing Cross",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Seven Kings",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "South Wimbledon",
+"to": "Forest Gate",
+"slot": 49,
+"legs": [
+[
+"Northern",
+"South Wimbledon",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Forest Gate",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Ruislip Manor",
+"to": "St. John's Wood",
+"slot": 50,
+"legs": [
+[
+"Metropolitan",
+"Ruislip Manor",
+"Baker Street",
+"seat"
+],
+[
+"Jubilee",
+"Baker Street",
+"St. John's Wood",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "West Brompton",
+"to": "Custom House",
+"slot": 57,
+"legs": [
+[
+"District",
+"West Brompton",
+"Paddington",
+"stand"
+],
+[
+"Elizabeth line",
+"Paddington",
+"Custom House",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Knightsbridge",
+"to": "Wimbledon",
+"slot": 54,
+"legs": [
+[
+"Piccadilly",
+"Knightsbridge",
+"Earl's Court",
+"seat"
+],
+[
+"District",
+"Earl's Court",
+"Wimbledon",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Ickenham",
+"to": "Kennington",
+"slot": 45,
+"legs": [
+[
+"Metropolitan",
+"Ickenham",
+"Baker Street",
+"seat"
+],
+[
+"Jubilee",
+"Baker Street",
+"Waterloo",
+"maybe"
+],
+[
+"Northern",
+"Waterloo",
+"Kennington",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Hounslow Central",
+"to": "Goodge Street",
+"slot": 51,
+"legs": [
+[
+"Piccadilly",
+"Hounslow Central",
+"Heathrow Terminals 2 & 3",
+"seat"
+],
+[
+"Elizabeth line",
+"Heathrow Terminals 2 & 3",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Northern",
+"Tottenham Court Road",
+"Goodge Street",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Elm Park",
+"to": "Ladbroke Grove",
+"slot": 44,
+"legs": [
+[
+"District",
+"Elm Park",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Paddington",
+"maybe"
+],
+[
+"Circle / Hammersmith & City",
+"Paddington",
+"Ladbroke Grove",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Brixton",
+"to": "Rayners Lane",
+"slot": 52,
+"legs": [
+[
+"Victoria",
+"Brixton",
+"Green Park",
+"seat"
+],
+[
+"Jubilee",
+"Green Park",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Rayners Lane",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Upminster",
+"to": "Warwick Avenue",
+"slot": 49,
+"legs": [
+[
+"District",
+"Upminster",
+"Whitechapel",
+"seat"
+],
+[
+"Elizabeth line",
+"Whitechapel",
+"Paddington",
+"maybe"
+],
+[
+"Bakerloo",
+"Paddington",
+"Warwick Avenue",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Chigwell",
+"to": "Stamford Brook",
+"slot": 24,
+"legs": [
+[
+"Central",
+"Chigwell",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Ealing Broadway",
+"maybe"
+],
+[
+"District",
+"Ealing Broadway",
+"Stamford Brook",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Acton Town",
+"to": "Sudbury Hill",
+"slot": 49,
+"legs": [
+[
+"Piccadilly",
+"Acton Town",
+"Sudbury Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "South Woodford",
+"to": "Perivale",
+"slot": 25,
+"legs": null,
+"overall": null
+},
+{
+"day": "TWT",
+"from": "Highbury & Islington",
+"to": "Croxley",
+"slot": 26,
+"legs": [
+[
+"Victoria",
+"Highbury & Islington",
+"King's Cross St. Pancras",
+"stand"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Croxley",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Green Park",
+"to": "Caledonian Road",
+"slot": 67,
+"legs": [
+[
+"Piccadilly",
+"Green Park",
+"Caledonian Road",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "FRI",
+"from": "Gidea Park",
+"to": "South Woodford",
+"slot": 53,
+"legs": [
+[
+"Elizabeth line",
+"Gidea Park",
+"Stratford",
+"seat"
+],
+[
+"Central",
+"Stratford",
+"South Woodford",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SUN",
+"from": "Aldgate",
+"to": "Clapham Common",
+"slot": 64,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Aldgate",
+"Bank and Monument",
+"seat"
+],
+[
+"Northern",
+"Bank and Monument",
+"Clapham Common",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Bayswater",
+"to": "Paddington",
+"slot": 63,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Bayswater",
+"Paddington",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Bermondsey",
+"to": "Hampstead",
+"slot": 52,
+"legs": [
+[
+"Jubilee",
+"Bermondsey",
+"London Bridge",
+"maybe"
+],
+[
+"Northern",
+"London Bridge",
+"Hampstead",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Hampstead",
+"to": "Alperton",
+"slot": 61,
+"legs": [
+[
+"Northern",
+"Hampstead",
+"Tottenham Court Road",
+"seat"
+],
+[
+"Elizabeth line",
+"Tottenham Court Road",
+"Ealing Broadway",
+"maybe"
+],
+[
+"District",
+"Ealing Broadway",
+"Ealing Common",
+"seat"
+],
+[
+"Piccadilly",
+"Ealing Common",
+"Alperton",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "TWT",
+"from": "Parsons Green",
+"to": "Goldhawk Road",
+"slot": 59,
+"legs": [
+[
+"District",
+"Parsons Green",
+"Hammersmith",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Hammersmith",
+"Goldhawk Road",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "Hampstead",
+"to": "Barkingside",
+"slot": 83,
+"legs": [
+[
+"Northern",
+"Hampstead",
+"Bank and Monument",
+"seat"
+],
+[
+"Central",
+"Bank and Monument",
+"Barkingside",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "FRI",
+"from": "Temple",
+"to": "Brentwood",
+"slot": 72,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Temple",
+"Liverpool Street",
+"stand"
+],
+[
+"Elizabeth line",
+"Liverpool Street",
+"Brentwood",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "MON",
+"from": "Rayners Lane",
+"to": "West Harrow",
+"slot": 39,
+"legs": [
+[
+"Metropolitan",
+"Rayners Lane",
+"West Harrow",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "SAT",
+"from": "Wembley Park",
+"to": "Chalfont & Latimer",
+"slot": 40,
+"legs": [
+[
+"Metropolitan",
+"Wembley Park",
+"Chalfont & Latimer",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Kew Gardens",
+"to": "Romford",
+"slot": 56,
+"legs": [
+[
+"District",
+"Kew Gardens",
+"Ealing Broadway",
+"seat"
+],
+[
+"Elizabeth line",
+"Ealing Broadway",
+"Romford",
+"maybe"
+]
+],
+"overall": "part"
+},
+{
+"day": "SAT",
+"from": "Manor House",
+"to": "Ruislip Manor",
+"slot": 26,
+"legs": [
+[
+"Piccadilly",
+"Manor House",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Metropolitan",
+"King's Cross St. Pancras",
+"Ruislip Manor",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Wimbledon",
+"to": "Notting Hill Gate",
+"slot": 73,
+"legs": [
+[
+"District",
+"Wimbledon",
+"Notting Hill Gate",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Arnos Grove",
+"to": "Oval",
+"slot": 45,
+"legs": [
+[
+"Piccadilly",
+"Arnos Grove",
+"King's Cross St. Pancras",
+"seat"
+],
+[
+"Northern",
+"King's Cross St. Pancras",
+"Oval",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Rickmansworth",
+"to": "Hampstead",
+"slot": 20,
+"legs": null,
+"overall": null
+},
+{
+"day": "TWT",
+"from": "Epping",
+"to": "Seven Sisters",
+"slot": 34,
+"legs": [
+[
+"Central",
+"Epping",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Farringdon",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Farringdon",
+"King's Cross St. Pancras",
+"stand"
+],
+[
+"Victoria",
+"King's Cross St. Pancras",
+"Seven Sisters",
+"seat"
+]
+],
+"overall": "part"
+},
+{
+"day": "SUN",
+"from": "Chalfont & Latimer",
+"to": "Rickmansworth",
+"slot": 66,
+"legs": [
+[
+"Metropolitan",
+"Chalfont & Latimer",
+"Rickmansworth",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Fairlop",
+"to": "Dollis Hill",
+"slot": 21,
+"legs": [
+[
+"Central",
+"Fairlop",
+"Stratford",
+"seat"
+],
+[
+"Elizabeth line",
+"Stratford",
+"Farringdon",
+"seat"
+],
+[
+"Circle / Hammersmith & City",
+"Farringdon",
+"Baker Street",
+"seat"
+],
+[
+"Metropolitan",
+"Baker Street",
+"Wembley Park",
+"seat"
+],
+[
+"Jubilee",
+"Wembley Park",
+"Dollis Hill",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "MON",
+"from": "West Kensington",
+"to": "East Ham",
+"slot": 70,
+"legs": [
+[
+"District",
+"West Kensington",
+"East Ham",
+"stand"
+]
+],
+"overall": "stand"
+},
+{
+"day": "MON",
+"from": "Wood Lane",
+"to": "Park Royal",
+"slot": 84,
+"legs": [
+[
+"Circle / Hammersmith & City",
+"Wood Lane",
+"Hammersmith",
+"seat"
+],
+[
+"Piccadilly",
+"Hammersmith",
+"Park Royal",
+"seat"
+]
+],
+"overall": "seat"
+},
+{
+"day": "TWT",
+"from": "Eastcote",
+"to": "Northolt",
+"slot": 56,
+"legs": [
+[
+"Piccadilly",
+"Eastcote",
+"Ealing Common",
+"seat"
+],
+[
+"District",
+"Ealing Common",
+"Ealing Broadway",
+"seat"
+],
+[
+"Central",
+"Ealing Broadway",
+"Northolt",
+"seat"
+]
+],
+"overall": "seat"
+}
+]
