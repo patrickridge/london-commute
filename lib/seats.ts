@@ -152,6 +152,9 @@ export function legSlot(slot: number, leg: Leg): number {
 const SEAT = 0.8; // of seats
 const MAYBE = 1.1; // of seats
 const PACKED = 0.9; // of total capacity
+// Capacity assumes everyone packed in tight. People stop moving down well before that, so from
+// just over half of it an average train is full by the doors and some can't be boarded.
+const DOORS_FULL = 0.55; // of total capacity
 
 export const LEVELS = ["seat", "maybe", "stand", "packed"] as const;
 export type Level = (typeof LEVELS)[number];
@@ -162,6 +165,11 @@ export function level(people: number | null, train: Train): Level | null {
   if (people < SEAT * train.seats) return "seat";
   if (people < MAYBE * train.seats) return "maybe";
   return "stand";
+}
+
+/** True when, at this load, some trains are likely too full by the doors to get on. */
+export function hardToBoard(people: number | null, train: Train): boolean {
+  return people !== null && people >= DOORS_FULL * train.capacity && people < PACKED * train.capacity;
 }
 
 export interface Journey {

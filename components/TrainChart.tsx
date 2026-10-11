@@ -56,7 +56,7 @@ export function TrainChart(props: { people: (number | null)[]; train: Train; slo
               y={props.train.capacity}
               stroke="#dc2626"
               strokeDasharray="4 4"
-              label={{ value: "Full", position: "insideTopLeft", fill: "#dc2626", fontSize: 12 }}
+              label={{ value: "Crush capacity", position: "insideTopLeft", fill: "#dc2626", fontSize: 12 }}
             />
             <Area dataKey="people" type="monotone" stroke="var(--color-people)" fill="var(--color-people)" fillOpacity={0.12} strokeWidth={2} connectNulls />
             {now != null && <ReferenceDot x={(props.slot * SLOT_MINUTES) / 60} y={now} r={5} fill="var(--foreground)" stroke="white" strokeWidth={2} />}

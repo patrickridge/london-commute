@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeftRight, Bike, Clock, Lightbulb, TrainFront } from "lucide-react";
+import { ArrowLeftRight, Bike, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
 import { TrainChart } from "@/components/TrainChart";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import {
   DAY_TYPE_BY_WEEKDAY,
   TRAINS,
   betterEarlier,
+  hardToBoard,
   journey,
   legSlot,
   overall,
@@ -258,6 +259,7 @@ function JourneyCard({ legs, slot, tubeMinutes, from }: { legs: Leg[]; slot: num
   const rough = 2 * stops + 5 * (legs.length - 1);
   const first = legs[0];
   const earlier = betterEarlier(first.links, slot, TRAINS[first.line]);
+  const crowdedDoors = legs.findIndex((leg, i) => hardToBoard(trips[i].people, TRAINS[leg.line]));
 
   return (
     <Card>
@@ -283,6 +285,14 @@ function JourneyCard({ legs, slot, tubeMinutes, from }: { legs: Leg[]; slot: num
             </li>
           ))}
         </ol>
+        {crowdedDoors >= 0 && (
+          <p className="flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-950 dark:bg-amber-950 dark:text-amber-50">
+            <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-600" />
+            <span>
+              At this time, some {legs[crowdedDoors].line} trains may be too full to get on at {legs[crowdedDoors].links[0].from}.
+            </span>
+          </p>
+        )}
         {earlier && earlier[1] !== "packed" ? (
           <Tip>
             Leave at <strong>{slotLabel(earlier[0])}</strong> and {TIP[earlier[1]]}.

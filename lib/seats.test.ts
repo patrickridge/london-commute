@@ -6,6 +6,7 @@ import {
   SLOTS,
   TRAINS,
   betterEarlier,
+  hardToBoard,
   journey,
   legSlot,
   level,
@@ -86,6 +87,13 @@ describe("seat levels", () => {
     [450, "packed"],
   ])("%i people is %s", (people, expected) => {
     expect(level(people, TRAIN)).toBe(expected);
+  });
+
+  it("warns about full doors from 55% of capacity, but not once it's packed", () => {
+    expect(hardToBoard(274, TRAIN)).toBe(false);
+    expect(hardToBoard(276, TRAIN)).toBe(true);
+    expect(hardToBoard(450, TRAIN)).toBe(false); // the packed headline already says so
+    expect(hardToBoard(null, TRAIN)).toBe(false);
   });
 
   it("uses the next train when a band is empty", () => {
