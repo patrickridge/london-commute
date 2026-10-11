@@ -4,7 +4,7 @@
 
 Live site: https://london-commute-planner.vercel.app
 
-Pick two stations and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether another way would be better: getting off early and walking, staying on one line instead of changing, or doing part of the trip by Santander Cycle.
+Pick two stations (or postcodes) and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether another way would be better: getting off early and walking, staying on one line instead of changing, or doing part of the trip by Santander Cycle.
 
 <img src="docs/screenshot.jpg" alt="Waterloo to Liverpool Street: a seat on both legs, 12 minutes by tube, 16 by hire bike" width="720">
 
@@ -28,6 +28,8 @@ The cut-offs are my own judgement: the figures are averages over the whole train
 Capacity is TfL's crush figure: everyone standing, packed tight. In practice people stop moving down long before that, so a train can be too full by the doors to get on while the average is only just over half of it. From 55% of capacity the planner warns that some trains may be too full to board, and the chart labels the line "Crush capacity" rather than "Full".
 
 **Your route.** Each line is a set of one-way links between stations, joined where stations share a name. Dijkstra's algorithm finds the route with the fewest stops, with a change of line costing four stops, and leaves out lines with no trains around your time. Half-hourly lines leave empty 15-minute bands, so a band with no train uses the next one.
+
+**From your door.** Either end can be a postcode instead of a station. It's looked up with [postcodes.io](https://postcodes.io) (free, no key; only the postcode is sent), the nearest stations are offered with walking times, and every option is timed door to door.
 
 **Journey time.** From TfL's Journey Planner, station to station. If it's unavailable, the page falls back to a rough estimate (2 minutes a stop, 5 a change).
 
@@ -83,11 +85,13 @@ GitHub Actions runs all four on every push.
 lib/seats.ts              Route planning and seat levels (no UI)
 lib/bikes.ts              Nearby docks and bike times (no UI)
 lib/options.ts            Other ways to do the trip: walk, stay on, bike part way (no UI)
+lib/places.ts             Postcode lookup and nearest stations
 lib/tfl.ts                Server-side calls to TfL, cached
 app/api/live/route.ts     TfL's journey time between two stations
 app/api/docks/route.ts    Live Santander Cycles docks
 components/Planner.tsx    The planner
 components/Options.tsx    Other ways to do it
+components/PostcodeField.tsx  Starting or ending at a postcode
 components/TrainChart.tsx How full the first train is through the day
 public/data/              Stations and per-day train loads, exported from tube-crowding
 ```

@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftRight, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
 import { Options } from "@/components/Options";
+import { PostcodeField } from "@/components/PostcodeField";
 import { TrainChart } from "@/components/TrainChart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Dock } from "@/lib/bikes";
 import { options } from "@/lib/options";
+import { lookupPostcode, type Place } from "@/lib/places";
 import {
   DAY_TYPE_BY_WEEKDAY,
   TRAINS,
@@ -95,6 +97,8 @@ export function Planner() {
 
   const [stations, setStations] = useState<Stations>({});
   const [docks, setDocks] = useState<Dock[] | null>(null);
+  const [fromPlace, setFromPlace] = useState<Place | null>(null);
+  const [toPlace, setToPlace] = useState<Place | null>(null);
   const [from, setFrom] = useState(params.get("from") ?? DEFAULT.from);
   const [to, setTo] = useState(params.get("to") ?? DEFAULT.to);
   const [weekday, setWeekday] = useState(() => new Date().getDay());
@@ -118,6 +122,16 @@ export function Planner() {
       .catch(() => {}); // options without hire bikes are still shown
   }, []);
 
+  // Postcodes in a bookmarked link are looked up again; the station in the link stays as chosen.
+  useEffect(() => {
+    const fromPostcode = params.get("fromPostcode");
+    const toPostcode = params.get("toPostcode");
+    if (fromPostcode) lookupPostcode(fromPostcode).then(setFromPlace).catch(() => {});
+    if (toPostcode) lookupPostcode(toPostcode).then(setToPlace).catch(() => {});
+    // Only on first load.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     fetch(`/data/links-${dayType}.json`)
       .then((res) => res.json())
@@ -136,8 +150,11 @@ export function Planner() {
 
   // Keep the journey in the URL so it can be bookmarked. The day isn't saved: a bookmark opens on today.
   useEffect(() => {
-    router.replace(`${pathname}?${new URLSearchParams({ from, to, time })}`, { scroll: false });
-  }, [from, to, time, pathname, router]);
+    const query = new URLSearchParams({ from, to, time });
+    if (fromPlace) query.set("fromPostcode", fromPlace.postcode);
+    if (toPlace) query.set("toPostcode", toPlace.postcode);
+    router.replace(`${pathname}?${query}`, { scroll: false });
+  }, [from, to, time, fromPlace, toPlace, pathname, router]);
 
   const [hours, mins] = time.split(":").map(Number);
   const slot = timeToSlot(hours || 0, mins || 0);
@@ -146,9 +163,19 @@ export function Planner() {
   const ways = useMemo(
     () =>
       links && legs && stations[from] && stations[to]
-        ? options({ links, places: { stations }, from, to, slot, legs, tubeMinutes: live?.tubeMinutes ?? null, docks })
+        ? options({
+            links,
+            places: { stations },
+            from,
+            to,
+            slot,
+            legs,
+            tubeMinutes: live?.tubeMinutes ?? null,
+            docks,
+            door: { from: fromPlace ?? undefined, to: toPlace ?? undefined },
+          })
         : null,
-    [links, legs, stations, from, to, slot, live, docks],
+    [links, legs, stations, from, to, slot, live, docks, fromPlace, toPlace],
   );
 
   return (
@@ -159,7 +186,20 @@ export function Planner() {
           <CardDescription>Any two Underground or Elizabeth line stations.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <StationField id="from" label="From" value={from} onChange={setFrom} stations={names} />
+          <div className="space-y-2">
+            <StationField id="from" label="From" value={from} onChange={setFrom} stations={names} />
+            <PostcodeField
+              id="from"
+              place={fromPlace}
+              station={from}
+              stations={stations}
+              onStation={setFrom}
+              onPlace={(place, station) => {
+                setFromPlace(place);
+                if (station) setFrom(station);
+              }}
+            />
+          </div>
           <div className="flex justify-center">
             <Button
               variant="outline"
@@ -167,12 +207,27 @@ export function Planner() {
               onClick={() => {
                 setFrom(to);
                 setTo(from);
+                setFromPlace(toPlace);
+                setToPlace(fromPlace);
               }}
             >
               <ArrowLeftRight /> Swap for the way back
             </Button>
           </div>
-          <StationField id="to" label="To" value={to} onChange={setTo} stations={names} />
+          <div className="space-y-2">
+            <StationField id="to" label="To" value={to} onChange={setTo} stations={names} />
+            <PostcodeField
+              id="to"
+              place={toPlace}
+              station={to}
+              stations={stations}
+              onStation={setTo}
+              onPlace={(place, station) => {
+                setToPlace(place);
+                if (station) setTo(station);
+              }}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label htmlFor="day">Day</Label>
@@ -212,7 +267,13 @@ export function Planner() {
           </Message>
         ) : (
           <>
-            <JourneyCard legs={legs} slot={slot} tubeMinutes={live?.tubeMinutes ?? null} from={from} />
+            <JourneyCard
+              legs={legs}
+              slot={slot}
+              tubeMinutes={live?.tubeMinutes ?? null}
+              doorMinutes={fromPlace || toPlace ? (ways?.find((o) => o.kind === "tube")?.minutes ?? null) : null}
+              from={from}
+            />
             {ways && <Options list={ways} liveBikes={docks !== null} />}
             <TrainChart
               people={legs[0].links[0].perTrain}
@@ -266,7 +327,8 @@ function LineLabel({ line }: { line: string }) {
   );
 }
 
-function JourneyCard({ legs, slot, tubeMinutes, from }: { legs: Leg[]; slot: number; tubeMinutes: number | null; from: string }) {
+function JourneyCard(props: { legs: Leg[]; slot: number; tubeMinutes: number | null; doorMinutes: number | null; from: string }) {
+  const { legs, slot, tubeMinutes, doorMinutes, from } = props;
   const trips = legs.map((leg) => journey(leg.links, legSlot(slot, leg), TRAINS[leg.line]));
   const summary = overall(trips.map((t) => t.level));
   const stops = legs.reduce((n, leg) => n + leg.links.length, 0);
@@ -285,7 +347,7 @@ function JourneyCard({ legs, slot, tubeMinutes, from }: { legs: Leg[]; slot: num
           </p>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Clock className="size-4" />
-            {tubeMinutes ? `${tubeMinutes} min by tube` : `about ${rough} min by tube`}
+            {doorMinutes ? `${doorMinutes} min door to door` : tubeMinutes ? `${tubeMinutes} min by tube` : `about ${rough} min by tube`}
           </p>
         </div>
         <ol className="space-y-2">

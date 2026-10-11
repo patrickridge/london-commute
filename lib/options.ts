@@ -181,20 +181,35 @@ export interface Trip {
   tubeMinutes: number | null;
   /** Live Santander Cycles docks, if known. */
   docks: Dock[] | null;
+  /** Where the trip really starts and ends, if not at the stations (e.g. from a postcode). */
+  door?: { from?: Point; to?: Point };
 }
 
 /** Every option worth showing, fastest first. The tube all the way is always included. */
 export function options(trip: Trip): Option[] {
   const { links, places, from, to, slot, legs, docks } = trip;
-  const origin = point(places, from);
-  const dest = point(places, to);
+  const station = { from: point(places, from), to: point(places, to) };
+  // Bikes and walks go door to door; the tube needs a walk to and from the station.
+  const origin = trip.door?.from ?? station.from;
+  const dest = trip.door?.to ?? station.to;
+  const walkIn = trip.door?.from ? walkMinutes(origin, station.from) : 0;
+  const walkOut = trip.door?.to ? walkMinutes(station.to, dest) : 0;
+  const first: Step[] = walkIn ? [{ mode: "walk", from: "start", to: from, minutes: walkIn }] : [];
+  const last: Step[] = walkOut ? [{ mode: "walk", from: to, to: "destination", minutes: walkOut }] : [];
   // Scale rough tube times so the main route matches TfL's own figure.
   const scale = trip.tubeMinutes ? Math.min(1.5, Math.max(0.7, trip.tubeMinutes / roughMinutes(legs))) : 1;
   const tubeTime = (l: Leg[]) => scale * roughMinutes(l);
 
   const main = tubeSteps(legs, slot);
   const found: Option[] = [
-    { kind: "tube", minutes: trip.tubeMinutes ?? tubeTime(legs), steps: main.steps, crowding: main.crowding, changes: legs.length - 1, fullDoors: main.fullDoors },
+    {
+      kind: "tube",
+      minutes: walkIn + (trip.tubeMinutes ?? tubeTime(legs)) + walkOut,
+      steps: [...first, ...main.steps, ...last],
+      crowding: main.crowding,
+      changes: legs.length - 1,
+      fullDoors: main.fullDoors,
+    },
   ];
 
   const names = Object.keys(places.stations).filter((n) => n !== from && n !== to);
@@ -211,8 +226,8 @@ export function options(trip: Trip): Option[] {
     const t = tubeSteps(l, slot);
     const option: Option = {
       kind: "walk-end",
-      minutes: tubeTime(l) + walk,
-      steps: [...t.steps, { mode: "walk", from: name, to, minutes: walk }],
+      minutes: walkIn + tubeTime(l) + walk,
+      steps: [...first, ...t.steps, { mode: "walk", from: name, to, minutes: walk }],
       crowding: t.crowding,
       changes: l.length - 1,
       fullDoors: t.fullDoors,
@@ -235,8 +250,8 @@ export function options(trip: Trip): Option[] {
       const t = tubeSteps(l, slot);
       const option: Option = {
         kind: "tube-hire",
-        minutes: tubeTime(l) + bike.minutes + UNLOCK_MIN,
-        steps: [...t.steps, { mode: "hire", from: name, to, minutes: bike.minutes + UNLOCK_MIN }],
+        minutes: walkIn + tubeTime(l) + bike.minutes + UNLOCK_MIN,
+        steps: [...first, ...t.steps, { mode: "hire", from: name, to, minutes: bike.minutes + UNLOCK_MIN }],
         crowding: t.crowding,
         changes: l.length - 1,
         fullDoors: t.fullDoors,
@@ -260,8 +275,8 @@ export function options(trip: Trip): Option[] {
       const t = tubeSteps(l, slot);
       const option: Option = {
         kind: "hire-tube",
-        minutes: ride + tubeTime(l),
-        steps: [{ mode: "hire", from, to: name, minutes: ride }, ...t.steps],
+        minutes: ride + tubeTime(l) + walkOut,
+        steps: [{ mode: "hire", from, to: name, minutes: ride }, ...t.steps, ...last],
         crowding: t.crowding,
         changes: l.length - 1,
         fullDoors: t.fullDoors,
