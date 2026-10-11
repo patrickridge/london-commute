@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeftRight, Bike, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
+import { ArrowLeftRight, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
+import { Options } from "@/components/Options";
 import { TrainChart } from "@/components/TrainChart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,7 +19,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import type { BikeTrip } from "@/lib/bikes";
+import type { Dock } from "@/lib/bikes";
+import { options } from "@/lib/options";
 import {
   DAY_TYPE_BY_WEEKDAY,
   TRAINS,
@@ -77,9 +79,9 @@ const LINE_COLOURS: Record<string, [string, string]> = {
 
 interface Live {
   tubeMinutes: number | null;
-  bike: BikeTrip | null;
-  ownBikeMinutes: number;
 }
+
+type Stations = Record<string, [string, number, number]>;
 
 function nowRounded(): string {
   const now = new Date();
@@ -91,7 +93,8 @@ export function Planner() {
   const pathname = usePathname();
   const params = useSearchParams();
 
-  const [stations, setStations] = useState<string[]>([]);
+  const [stations, setStations] = useState<Stations>({});
+  const [docks, setDocks] = useState<Dock[] | null>(null);
   const [from, setFrom] = useState(params.get("from") ?? DEFAULT.from);
   const [to, setTo] = useState(params.get("to") ?? DEFAULT.to);
   const [weekday, setWeekday] = useState(() => new Date().getDay());
@@ -108,7 +111,11 @@ export function Planner() {
   useEffect(() => {
     fetch("/data/stations.json")
       .then((res) => res.json())
-      .then((data: Record<string, unknown>) => setStations(Object.keys(data)));
+      .then((data: Stations) => setStations(data));
+    fetch("/api/docks")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: Dock[] | null) => setDocks(data))
+      .catch(() => {}); // options without hire bikes are still shown
   }, []);
 
   useEffect(() => {
@@ -135,6 +142,14 @@ export function Planner() {
   const [hours, mins] = time.split(":").map(Number);
   const slot = timeToSlot(hours || 0, mins || 0);
   const legs = useMemo(() => (links && from !== to ? plan(links, from, to, slot) : null), [links, from, to, slot]);
+  const names = useMemo(() => Object.keys(stations), [stations]);
+  const ways = useMemo(
+    () =>
+      links && legs && stations[from] && stations[to]
+        ? options({ links, places: { stations }, from, to, slot, legs, tubeMinutes: live?.tubeMinutes ?? null, docks })
+        : null,
+    [links, legs, stations, from, to, slot, live, docks],
+  );
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
@@ -144,7 +159,7 @@ export function Planner() {
           <CardDescription>Any two Underground or Elizabeth line stations.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <StationField id="from" label="From" value={from} onChange={setFrom} stations={stations} />
+          <StationField id="from" label="From" value={from} onChange={setFrom} stations={names} />
           <div className="flex justify-center">
             <Button
               variant="outline"
@@ -157,7 +172,7 @@ export function Planner() {
               <ArrowLeftRight /> Swap for the way back
             </Button>
           </div>
-          <StationField id="to" label="To" value={to} onChange={setTo} stations={stations} />
+          <StationField id="to" label="To" value={to} onChange={setTo} stations={names} />
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label htmlFor="day">Day</Label>
@@ -198,7 +213,7 @@ export function Planner() {
         ) : (
           <>
             <JourneyCard legs={legs} slot={slot} tubeMinutes={live?.tubeMinutes ?? null} from={from} />
-            <BikeCard live={live} from={from} to={to} />
+            {ways && <Options list={ways} liveBikes={docks !== null} />}
             <TrainChart
               people={legs[0].links[0].perTrain}
               train={TRAINS[legs[0].line]}
@@ -313,61 +328,5 @@ function Tip({ children }: { children: React.ReactNode }) {
       <Lightbulb className="mt-0.5 size-4 shrink-0 text-amber-600" />
       <span>{children}</span>
     </p>
-  );
-}
-
-function hireText(bike: BikeTrip, from: string, to: string): string {
-  if (bike.docksAtStart === 0) return `No docks within a 6-minute walk of ${from}`;
-  if (bike.docksAtEnd === 0) return `No docks within a 6-minute walk of ${to}`;
-  if (!bike.start) return `No bikes at the docks near ${from} right now`;
-  if (!bike.end) return `No free spaces near ${to} right now`;
-  const ebikes = bike.ebikesNearby ? `, ${bike.ebikesNearby} electric` : "";
-  return `${bike.bikesNearby} bikes${ebikes} near ${from}, ${bike.spacesNearby} free spaces near ${to}`;
-}
-
-function BikeCard({ live, from, to }: { live: Live | null; from: string; to: string }) {
-  const rows: { icon: React.ReactNode; label: string; minutes: number | null; note: string }[] = live
-    ? [
-        { icon: <TrainFront className="size-4" />, label: "Tube", minutes: live.tubeMinutes, note: "station to station" },
-        {
-          icon: <Bike className="size-4" />,
-          label: "Santander Cycle",
-          minutes: live.bike?.minutes != null ? Math.round(live.bike.minutes) : null,
-          note: live.bike ? hireText(live.bike, from, to) : "Live dock data isn't available right now",
-        },
-        { icon: <Bike className="size-4" />, label: "Your own bike", minutes: live.ownBikeMinutes, note: "door to door, roughly" },
-      ]
-    : [];
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Tube or bike?</CardTitle>
-        <CardDescription>Bike and space counts are live, right now.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {!live ? (
-          <p className="text-sm text-muted-foreground">Checking live times…</p>
-        ) : (
-          <ul className="divide-y">
-            {rows.map((row) => (
-              <li key={row.label} className="flex items-start justify-between gap-4 py-2.5 first:pt-0 last:pb-0">
-                <div className="flex gap-2">
-                  <span className="mt-0.5 text-muted-foreground">{row.icon}</span>
-                  <div>
-                    <p className="text-sm font-medium">{row.label}</p>
-                    <p className="text-xs text-muted-foreground">{row.note}</p>
-                  </div>
-                </div>
-                <p className="text-lg font-semibold tabular-nums whitespace-nowrap">{row.minutes != null ? `${row.minutes} min` : "–"}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="mt-3 text-xs text-muted-foreground">
-          Cycling assumes 15 km/h on a hire bike and 18 km/h on your own, on roads about 30% longer than a straight line.
-          Lime and other dockless bikes don&apos;t publish open data for London.
-        </p>
-      </CardContent>
-    </Card>
   );
 }

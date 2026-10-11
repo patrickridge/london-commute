@@ -4,7 +4,7 @@
 
 Live site: https://london-commute-planner.vercel.app
 
-Pick two stations and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether a Santander Cycle or your own bike would be quicker.
+Pick two stations and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether another way would be better: getting off early and walking, staying on one line instead of changing, or doing part of the trip by Santander Cycle.
 
 <img src="docs/screenshot.jpg" alt="Waterloo to Liverpool Street: a seat on both legs, 12 minutes by tube, 16 by hire bike" width="720">
 
@@ -31,7 +31,14 @@ Capacity is TfL's crush figure: everyone standing, packed tight. In practice peo
 
 **Journey time.** From TfL's Journey Planner, station to station. If it's unavailable, the page falls back to a rough estimate (2 minutes a stop, 5 a change).
 
-**Tube or bike.** TfL's BikePoint API gives live counts of bikes, e-bikes and free spaces at all ~800 Santander Cycles docks. The planner finds docks within a 6-minute walk (500 m) of each station, takes the nearest with a bike and the nearest with a free space, and adds walk + ride + walk. Riding assumes 15 km/h on a hire bike and 18 km/h on your own, on roads about 30% longer than a straight line.
+**Other ways to do it** (`lib/options.ts`). The planner also tries:
+
+- getting off at any station within a 20-minute walk of the destination and walking the rest, which covers both getting off early and staying on one line instead of changing;
+- the tube part way, then a Santander Cycle from a dock near that station;
+- a Santander Cycle to another station, then the tube;
+- a hire bike, your own bike, or walking, all the way.
+
+To make that quick, it runs Dijkstra's algorithm once from the start (and once backwards from the destination) rather than once per station. Tube times are estimated from stops, changes and platform waits, scaled so the main route matches TfL's Journey Planner. Each option gets the same seat check as the main route. It shows at most four, and only ones that are quicker, calmer, or save a change compared with the tube all the way. TfL's BikePoint API gives live counts of bikes and free spaces at all ~800 docks; riding assumes 15 km/h on a hire bike and 18 km/h on your own, walking 4.8 km/h, on roads about 30% longer than a straight line.
 
 ## Where the data comes from
 
@@ -75,9 +82,12 @@ GitHub Actions runs all four on every push.
 ```
 lib/seats.ts              Route planning and seat levels (no UI)
 lib/bikes.ts              Nearby docks and bike times (no UI)
+lib/options.ts            Other ways to do the trip: walk, stay on, bike part way (no UI)
 lib/tfl.ts                Server-side calls to TfL, cached
-app/api/live/route.ts     Live tube time and bikes for a journey
+app/api/live/route.ts     TfL's journey time between two stations
+app/api/docks/route.ts    Live Santander Cycles docks
 components/Planner.tsx    The planner
+components/Options.tsx    Other ways to do it
 components/TrainChart.tsx How full the first train is through the day
 public/data/              Stations and per-day train loads, exported from tube-crowding
 ```

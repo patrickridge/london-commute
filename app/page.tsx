@@ -17,8 +17,8 @@ const EXPLAINERS = [
     body: "The planner finds the route with the fewest stops, treating a change of line as costing four stops, and skips lines that aren't running at your time. Tube times come from TfL's Journey Planner.",
   },
   {
-    title: "Bike or tube",
-    body: "Live counts from every Santander Cycles dock show whether there's a bike within a 6-minute walk of your station and a free space at the other end. Cycling times are estimated from distance.",
+    title: "Other ways to do it",
+    body: "It also tries getting off early and walking, staying on one line instead of changing, and finishing or starting by Santander Cycle using live bike and space counts, and shows any that are quicker, calmer or save a change.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Home() {
           <p className="text-sm font-medium text-primary">Underground and Elizabeth line</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Plan your commute</h1>
           <p className="mt-3 text-muted-foreground">
-            How long it takes, whether you&apos;ll get a seat, and whether a bike would be quicker. Based on
+            How long it takes, whether you&apos;ll get a seat, and whether getting off early, staying on or biking part of the way is better. Based on
             TfL&apos;s 2025 passenger counts and live Santander Cycles data.
           </p>
         </section>
