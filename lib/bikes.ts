@@ -2,7 +2,7 @@
 // Dock data comes from TfL's BikePoint API (live counts of bikes and free spaces at each dock).
 
 export const WALK_RADIUS_M = 500; // about a 6-minute walk
-const WALK_KMH = 4.8;
+export const WALK_KMH = 4.8;
 export const HIRE_KMH = 15; // a typical pace on a heavy hire bike in city traffic
 export const OWN_BIKE_KMH = 18;
 export const ROUTE_FACTOR = 1.3; // roads are longer than a straight line
