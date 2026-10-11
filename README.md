@@ -25,7 +25,7 @@ When I moved to London I wanted to know three things about my commute: how long 
 
 The cut-offs are my own judgement: the figures are averages over the whole train, and the ends of a train are usually emptier than the middle.
 
-Capacity is TfL's crush figure: everyone standing, packed tight. In practice people stop moving down long before that, so a train can be too full by the doors to get on while the average is only just over half of it. From 55% of capacity the planner warns that some trains may be too full to board, and the chart labels the line "Crush capacity" rather than "Full".
+Capacity is TfL's crush figure: everyone standing, packed tight. In practice people stop moving down long before that, so a train can be too full by the doors to get on while the average is only just over half of it. From 55% of capacity the planner warns that some trains may be too full to board, and the chart marks that level with a dashed line instead of the crush figure, which typical trains never get near.
 
 **Your route.** Each line is a set of one-way links between stations, joined where stations share a name. Dijkstra's algorithm finds the route with the fewest stops, with a change of line costing four stops, and leaves out lines with no trains around your time. Half-hourly lines leave empty 15-minute bands, so a band with no train uses the next one.
 

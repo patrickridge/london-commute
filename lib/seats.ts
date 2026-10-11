@@ -154,7 +154,7 @@ const MAYBE = 1.1; // of seats
 const PACKED = 0.9; // of total capacity
 // Capacity assumes everyone packed in tight. People stop moving down well before that, so from
 // just over half of it an average train is full by the doors and some can't be boarded.
-const DOORS_FULL = 0.55; // of total capacity
+export const DOORS_FULL = 0.55; // of total capacity
 
 export const LEVELS = ["seat", "maybe", "stand", "packed"] as const;
 export type Level = (typeof LEVELS)[number];
