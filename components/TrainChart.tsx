@@ -4,7 +4,7 @@ import { Area, AreaChart, CartesianGrid, ReferenceDot, ReferenceLine, XAxis, YAx
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { SLOT_MINUTES, slotLabel, type Train } from "@/lib/seats";
+import { DOORS_FULL, SLOT_MINUTES, slotLabel, type Train } from "@/lib/seats";
 
 const config = { people: { label: "People on the train", color: "var(--chart-1)" } } satisfies ChartConfig;
 const FIRST_SLOT = 20; // 05:00, when the first trains run
@@ -15,7 +15,13 @@ export function TrainChart(props: { people: (number | null)[]; train: Train; slo
     label: slotLabel(FIRST_SLOT + i),
     people,
   }));
-  const peak = Math.max(props.train.capacity, ...data.map((d) => d.people ?? 0));
+  // Where trains start to be too full by the doors to get on (see hardToBoard in lib/seats.ts).
+  const doorsFull = Math.round(DOORS_FULL * props.train.capacity);
+  const peak = Math.max(doorsFull, ...data.map((d) => d.people ?? 0));
+  // Even steps on the people axis, with some headroom above the busiest point.
+  const step = peak > 900 ? 250 : peak > 450 ? 200 : 100;
+  const top = Math.ceil((peak * 1.1) / step) * step;
+  const yTicks = Array.from({ length: top / step + 1 }, (_, i) => i * step);
   const now = props.people[props.slot];
 
   return (
@@ -37,7 +43,7 @@ export function TrainChart(props: { people: (number | null)[]; train: Train; slo
               tickLine={false}
               axisLine={false}
             />
-            <YAxis domain={[0, Math.ceil((peak * 1.1) / 250) * 250]} tickCount={5} allowDecimals={false} tickLine={false} axisLine={false} width={40} />
+            <YAxis domain={[0, top]} ticks={yTicks} tickLine={false} axisLine={false} width={40} />
             <ChartTooltip
               content={
                 <ChartTooltipContent
@@ -53,10 +59,10 @@ export function TrainChart(props: { people: (number | null)[]; train: Train; slo
               label={{ value: "Seats", position: "insideTopLeft", fill: "var(--muted-foreground)", fontSize: 12 }}
             />
             <ReferenceLine
-              y={props.train.capacity}
-              stroke="#dc2626"
+              y={doorsFull}
+              stroke="#d97706"
               strokeDasharray="4 4"
-              label={{ value: "Crush capacity", position: "insideTopLeft", fill: "#dc2626", fontSize: 12 }}
+              label={{ value: "May have to wait for the next train", position: "insideTopLeft", fill: "#b45309", fontSize: 12 }}
             />
             <Area dataKey="people" type="monotone" stroke="var(--color-people)" fill="var(--color-people)" fillOpacity={0.12} strokeWidth={2} connectNulls />
             {now != null && <ReferenceDot x={(props.slot * SLOT_MINUTES) / 60} y={now} r={5} fill="var(--foreground)" stroke="white" strokeWidth={2} />}
