@@ -6,7 +6,7 @@ Live site: https://london-commute-planner.vercel.app
 
 Pick two stations (or postcodes) and a time. The planner shows how long the journey takes, whether you'll get a seat on each part of it, and whether another way would be better: getting off early and walking, staying on one line instead of changing, or doing part of the trip by Santander Cycle.
 
-<img src="docs/screenshot.jpg" alt="Waterloo to Liverpool Street: a seat on both legs, 12 minutes by tube, 16 by hire bike" width="720">
+<img src="docs/planner.jpg" alt="Balham to Green Park at 08:30 on a Tuesday: you will probably stand, some Northern trains may be too full to get on, and staying on to Embankment then taking a Santander Cycle avoids the change" width="720">
 
 ## Why
 
