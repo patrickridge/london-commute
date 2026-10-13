@@ -30,6 +30,7 @@ import {
   TRAINS,
   betterEarlier,
   hardToBoard,
+  modeWord,
   journey,
   legSlot,
   overall,
@@ -427,7 +428,9 @@ function JourneyCard(props: {
           </p>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Clock className="size-4" />
-            {doorMinutes ? `${doorMinutes} min door to door` : tubeMinutes ? `${tubeMinutes} min by tube` : `about ${rough} min by tube`}
+            {doorMinutes
+              ? `${doorMinutes} min door to door`
+              : `${tubeMinutes ? "" : "about "}${tubeMinutes ?? rough} min by ${modeWord(legs.map((leg) => leg.line))}`}
           </p>
         </div>
         <ol className="space-y-2">

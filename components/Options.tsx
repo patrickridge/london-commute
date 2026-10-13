@@ -2,7 +2,7 @@ import { Bike, Footprints, TrainFront } from "lucide-react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { badges, type Option, type Step } from "@/lib/options";
-import type { Overall } from "@/lib/seats";
+import { modeWord, type Overall } from "@/lib/seats";
 
 const CROWDING: Record<Overall, string> = {
   seat: "probably a seat",
@@ -17,7 +17,7 @@ function title(o: Option, tube: Option): string {
   const lastTube = o.steps.findLast((s) => s.mode === "tube");
   switch (o.kind) {
     case "tube":
-      return "Tube all the way";
+      return `${modeWord(o.steps.flatMap((s) => (s.mode === "tube" ? [s.line] : []))) === "tube" ? "Tube" : "Train"} all the way`;
     case "walk-end":
       return o.changes < tube.changes && firstTube?.mode === "tube" && o.changes === 0
         ? `Stay on the ${firstTube.line} line and walk`

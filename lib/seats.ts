@@ -30,6 +30,9 @@ export const TRAINS: Record<string, Train> = {
   Windrush: { seats: 186, capacity: 1092 },
 };
 
+/** "tube" for Underground and Elizabeth line trips, "train" once the DLR or Overground is involved. */
+export const modeWord = (lines: string[]) => (lines.some((l) => l === "DLR" || l === "Mildmay" || l === "Windrush") ? "train" : "tube");
+
 // NUMBAT publishes five day types; JavaScript's getDay() counts from Sunday.
 export const DAY_TYPE_BY_WEEKDAY = ["SUN", "MON", "TWT", "TWT", "TWT", "FRI", "SAT"] as const;
 export type DayType = (typeof DAY_TYPE_BY_WEEKDAY)[number];
