@@ -39,23 +39,31 @@ describe("isDue", () => {
 });
 
 describe("compose", () => {
-  it("leads with delays on the lines you use, with TfL's reason", () => {
+  const st = (line: string, severity: number, status: string) => ({ line, severity, status, reason: null });
+
+  it("leads with delays, and says when to leave or which way to go instead", () => {
     const alert = compose(commute(), links, status.filter((s) => s.line === "Central"))!;
-    expect(alert.title).toBe("Central: Severe Delays");
-    expect(alert.body).toMatch(/^For your 08:30 Liverpool Street to Oxford Circus\. Central Line: Severe delays/);
+    expect(alert.title).toBe("Central line: Severe Delays");
+    expect(alert.body).toBe("08:30 to Oxford Circus: leave by 08:15, or take the Elizabeth line to Tottenham Court Road, then the Central line.");
     expect(alert.url).toBe("/?from=Liverpool+Street&to=Oxford+Circus&time=08%3A30");
+  });
+
+  it("suggests a change of line to get round delays", () => {
+    const balham = commute({ from: "Balham", to: "Warren Street" });
+    expect(compose(balham, links, [st("Northern", 9, "Minor Delays")])!.body).toBe("08:30 to Warren Street: leave by 08:25, or change at Stockwell for the Victoria line.");
+    expect(compose(balham, links, [st("Northern", 3, "Part Suspended")])!.body).toBe("08:30 to Warren Street: change at Stockwell for the Victoria line.");
   });
 
   it("stays quiet on a normal day, unless asked for a daily summary", () => {
     const quiet = commute({ from: "Stratford", to: "Bond Street", time: "11:00" });
     expect(compose(quiet, links, good)).toBeNull();
-    expect(compose({ ...quiet, mode: "daily" }, links, good)?.title).toBe("Good service for your 11:00");
+    expect(compose({ ...quiet, mode: "daily" }, links, good)).toMatchObject({ title: "Good service for your 11:00", body: "Elizabeth line is running normally. Leave as usual." });
   });
 
   it("suggests a nearby time when it's clearly calmer", () => {
     const alert = compose(commute({ from: "Ealing Broadway", to: "Oxford Circus", time: "08:00" }), links, good)!;
-    expect(alert.title).toBe("Leave at 07:30 for a calmer train?");
-    expect(alert.body).toMatch(/some trains may be too full to get on\. At 07:30, you'll get a seat for part of it/);
+    expect(alert.title).toBe("Leave at 07:30 for a seat part of the way");
+    expect(alert.body).toBe("Your 08:00 to Oxford Circus is standing room only and trains may be too full to get on.");
   });
 
   it("always says something for a test notification", () => {

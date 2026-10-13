@@ -74,6 +74,7 @@ export function peopleAt(link: Link, slot: number): number | null {
 // ---------- planning a journey ----------
 
 const CHANGE_COST = 4; // a change "costs" as much as 4 stops, so routes don't swap lines to save one
+const AVOID_COST = 5; // a stop on a line to avoid, so it's only used where there's no other way
 const MINUTES_PER_STOP = 2; // rough, only used to pick the 15-minute band for later legs
 const MINUTES_PER_CHANGE = 5;
 
@@ -87,8 +88,9 @@ export interface Leg {
  * Cheapest route from origin to dest, split into one leg per line. Dijkstra's algorithm over
  * (station, line) pairs: each stop costs 1 and each change of line costs CHANGE_COST. Stretches
  * with no trains around `slot` are left out, so routes never use a line that isn't running.
+ * Lines in `avoid` (say, ones with delays) are used only where there's no reasonable way round.
  */
-export function plan(links: Link[], origin: string, dest: string, slot: number): Leg[] | null {
+export function plan(links: Link[], origin: string, dest: string, slot: number, avoid: ReadonlySet<string> = new Set()): Leg[] | null {
   const outgoing = new Map<string, Link[]>();
   for (const link of links) {
     if (peopleAt(link, slot) === null) continue;
@@ -117,7 +119,7 @@ export function plan(links: Link[], origin: string, dest: string, slot: number):
     }
     if (cost > (best.get(key(station, line)) ?? Infinity)) continue;
     for (const link of outgoing.get(station) ?? []) {
-      const next = cost + 1 + (line && link.line !== line ? CHANGE_COST : 0);
+      const next = cost + (avoid.has(link.line) ? AVOID_COST : 1) + (line && link.line !== line ? CHANGE_COST : 0);
       const state = key(link.to, link.line);
       if (next < (best.get(state) ?? Infinity)) {
         best.set(state, next);

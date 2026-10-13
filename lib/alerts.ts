@@ -3,7 +3,7 @@
 // can be tested on its own.
 
 import type { LineStatus } from "./lines";
-import { hardToBoard, journey, legSlot, type Link, type Overall, overall, plan, SLOTS, slotLabel, timeToSlot, TRAINS } from "./seats";
+import { hardToBoard, journey, type Leg, legSlot, type Link, type Overall, overall, plan, SLOTS, slotLabel, timeToSlot, TRAINS } from "./seats";
 
 export interface Commute {
   from: string;
@@ -69,11 +69,35 @@ export function isDue(commute: Commute, now: LondonTime, lastSent: string | null
   return now.minutes >= leave - EARLIEST_BEFORE && now.minutes <= leave - LATEST_BEFORE;
 }
 
-const LEVEL_TEXT = { seat: "you'll probably get a seat", maybe: "you might get a seat", part: "you'll get a seat for part of it", stand: "you'll probably stand", packed: "it'll be very crowded" };
-
-const listLines = (lines: string[]) => (lines.length === 1 ? `the ${lines[0]} line` : `the ${lines.slice(0, -1).join(", ")} and ${lines.at(-1)} lines`);
-
 const RANK: Record<Overall, number> = { seat: 0, maybe: 1, part: 2, stand: 3, packed: 4 };
+
+/** "Victoria line", "DLR", "Elizabeth line". */
+const label = (line: string) => (line === "DLR" ? line : `${line.replace(/ line$/, "")} line`);
+export const lineName = (line: string) => `the ${label(line)}`;
+/** "Northern line", "Northern and Victoria lines". */
+const lineList = (lines: string[]) =>
+  lines.length === 1 ? label(lines[0]) : `${lines.slice(0, -1).map((l) => l.replace(/ line$/, "")).join(", ")} and ${lines.at(-1)!.replace(/ line$/, "")} lines`;
+
+/** TfL reports the Circle and Hammersmith & City separately; the crowding data has them together. */
+const crowdingLine = (statusLine: string) => (statusLine === "Circle" || statusLine === "Hammersmith & City" ? "Circle / Hammersmith & City" : statusLine);
+
+/** Extra minutes to allow for TfL's severity, or null when the line is part closed or suspended. */
+function extraMinutes(severity: number) {
+  if (severity === 9) return 5; // minor delays
+  if (severity === 6 || severity === 7) return 15; // severe delays, reduced service
+  return null;
+}
+
+const clock = (minutes: number) => `${String(Math.floor((minutes + 1440) % 1440 / 60)).padStart(2, "0")}:${String((minutes + 1440) % 60).padStart(2, "0")}`;
+
+/** "change at Stockwell for the Victoria line", or "take the Elizabeth line to Tottenham Court Road, then the Central line". */
+function describe(route: Leg[], usual: Leg[]) {
+  const end = (leg: Leg) => leg.links.at(-1)!.to;
+  if (route[0].line === usual[0].line) return route.slice(1).map((leg) => `change at ${leg.links[0].from} for ${lineName(leg.line)}`).join(", then ");
+  return route.map((leg, i) => (i === 0 ? `take ${lineName(leg.line)} to ${end(leg)}` : i === route.length - 1 ? `then ${lineName(leg.line)}` : `then ${lineName(leg.line)} to ${end(leg)}`)).join(", ");
+}
+
+const stopsOn = (legs: Leg[], lines: ReadonlySet<string>) => legs.reduce((n, leg) => n + (lines.has(leg.line) ? leg.links.length : 0), 0);
 
 function crowding(links: Link[], commute: Commute, slot: number) {
   const legs = plan(links, commute.from, commute.to, slot);
@@ -96,40 +120,47 @@ function calmerTime(links: Link[], commute: Commute, slot: number, crowd: Overal
 
 /**
  * The alert for a commute, or null if there's nothing worth saying (in "issues" mode). `status` is
- * TfL's live status for the lines on the route.
+ * TfL's live status for the lines on the route. Kept short: what's wrong and what to do about it.
  */
 export function compose(commute: Commute, links: Link[], status: LineStatus[], { force = false } = {}): Alert | null {
   const url = `/?${new URLSearchParams({ from: commute.from, to: commute.to, time: commute.time })}`;
   const slot = timeToSlot(...(commute.time.split(":").map(Number) as [number, number]));
   const legs = plan(links, commute.from, commute.to, slot);
   if (!legs) return force ? { title: "No route at your usual time", body: `No trains from ${commute.from} to ${commute.to} at ${commute.time}.`, url } : null;
+  const trip = `${commute.time} to ${commute.to}`;
 
-  const { crowd, fullDoors } = crowding(links, commute, slot)!;
-  const calmer = crowd === "stand" || crowd === "packed" || fullDoors ? calmerTime(links, commute, slot, crowd, fullDoors) : null;
-  const trip = `${commute.time} ${commute.from} to ${commute.to}`;
-
-  // Worst status per line; TfL lists the Circle and Hammersmith & City separately.
+  // Worst status per line on the route.
   const worst = new Map<string, LineStatus>();
   for (const s of [...status].sort((a, b) => a.severity - b.severity)) if (!worst.has(s.line)) worst.set(s.line, s);
   const problems = [...worst.values()].filter((s) => s.severity < 10);
 
   if (problems.length) {
-    const title = problems.length === 1 ? `${problems[0].line}: ${problems[0].status}` : `Delays on ${listLines(problems.map((p) => p.line))}`;
-    const reason = problems[0].reason ? ` ${problems[0].reason.length > 140 ? `${problems[0].reason.slice(0, 137)}…` : problems[0].reason}` : "";
-    return { title, body: `For your ${trip}.${reason}`, url };
+    const title = problems.length === 1 ? `${label(problems[0].line)}: ${problems[0].status}` : `Delays on the ${lineList(problems.map((p) => p.line))}`;
+    const avoid = new Set(problems.map((p) => crowdingLine(p.line)));
+    const detour = plan(links, commute.from, commute.to, slot, avoid);
+    const way = detour && stopsOn(detour, avoid) < stopsOn(legs, avoid) ? describe(detour, legs) : null;
+    const extras = problems.map((p) => extraMinutes(p.severity));
+    const extra = extras.includes(null) ? null : Math.max(...(extras as number[]));
+    const leave = extra ? `leave by ${clock(minutesOf(commute.time) - extra)}` : null;
+    const advice = leave && way ? `${leave}, or ${way}` : (leave ?? way ?? "check another way before you leave");
+    return { title, body: `${trip}: ${advice}.`, url };
   }
 
+  const { crowd, fullDoors } = crowding(links, commute, slot)!;
+  const calmer = crowd === "stand" || crowd === "packed" || fullDoors ? calmerTime(links, commute, slot, crowd, fullDoors) : null;
   if (calmer) {
+    const gain = calmer.crowd === "seat" || calmer.crowd === "maybe" ? "a seat" : calmer.crowd === "part" ? "a seat part of the way" : "a calmer train";
+    const now = crowd === "packed" ? "packed" : crowd === "stand" ? "standing room only" : "busy";
     return {
-      title: `Leave at ${slotLabel(calmer.slot)} for a calmer train?`,
-      body: `Your ${trip}: ${crowd ? LEVEL_TEXT[crowd] : "busy"}${fullDoors ? ", and some trains may be too full to get on" : ""}. At ${slotLabel(calmer.slot)}, ${calmer.crowd ? LEVEL_TEXT[calmer.crowd] : "it's quieter"}${calmer.fullDoors ? "" : " and you should get on the first train"}.`,
+      title: `Leave at ${slotLabel(calmer.slot)} for ${gain}`,
+      body: `Your ${trip} is ${now}${fullDoors ? " and trains may be too full to get on" : ""}.`,
       url,
     };
   }
 
   if (commute.mode === "daily" || force) {
     const lines = [...new Set(legs.map((l) => l.line))];
-    return { title: `Good service for your ${commute.time}`, body: `Good service on ${listLines(lines)}; ${crowd ? LEVEL_TEXT[crowd] : "trains are running"}.`, url };
+    return { title: `Good service for your ${commute.time}`, body: `${lineList(lines)} ${lines.length === 1 ? "is" : "are"} running normally. Leave as usual.`, url };
   }
   return null;
 }
