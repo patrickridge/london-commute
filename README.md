@@ -31,6 +31,8 @@ Capacity is TfL's crush figure: everyone standing, packed tight. In practice peo
 
 **From your door.** Either end can be a postcode instead of a station. It's looked up with [postcodes.io](https://postcodes.io) (free, no key; only the postcode is sent), the nearest stations are offered with walking times, and every option is timed door to door.
 
+**For a regular commute.** The journey card shows TfL's live status for the lines on your route (with TfL's reason when there are delays), and a strip of the same trip leaving up to 45 minutes earlier or later, so you can see when you'd get a seat or avoid trains too full to board. The page remembers your last journey on that device and opens straight to it.
+
 **Journey time.** From TfL's Journey Planner, station to station. If it's unavailable, the page falls back to a rough estimate (2 minutes a stop, 5 a change).
 
 **Other ways to do it** (`lib/options.ts`). The planner also tries:
@@ -86,9 +88,11 @@ lib/seats.ts              Route planning and seat levels (no UI)
 lib/bikes.ts              Nearby docks and bike times (no UI)
 lib/options.ts            Other ways to do the trip: walk, stay on, bike part way (no UI)
 lib/places.ts             Postcode lookup and nearest stations
+lib/lines.ts              TfL line IDs and live status responses
 lib/tfl.ts                Server-side calls to TfL, cached
 app/api/live/route.ts     TfL's journey time between two stations
 app/api/docks/route.ts    Live Santander Cycles docks
+app/api/status/route.ts   Live status of the lines on a journey
 components/Planner.tsx    The planner
 components/Options.tsx    Other ways to do it
 components/PostcodeField.tsx  Starting or ending at a postcode

@@ -2,6 +2,7 @@
 import { cacheLife } from "next/cache";
 
 import { parseDocks, parseJourneyMinutes, type Dock } from "@/lib/bikes";
+import { type LineStatus, parseLineStatus } from "@/lib/lines";
 
 const BASE = "https://api.tfl.gov.uk";
 
@@ -27,4 +28,11 @@ export async function getTubeMinutes(fromId: string, toId: string): Promise<numb
   return parseJourneyMinutes(
     await tfl(`/Journey/JourneyResults/${fromId}/to/${toId}`, { mode: "tube,elizabeth-line,walking" }),
   );
+}
+
+/** Live status of some lines, e.g. "Minor Delays", worst first. Changes quickly, so cached briefly. */
+export async function getLineStatus(ids: string[]): Promise<LineStatus[]> {
+  "use cache";
+  cacheLife("minutes");
+  return parseLineStatus(await tfl(`/Line/${ids.join(",")}/Status`));
 }

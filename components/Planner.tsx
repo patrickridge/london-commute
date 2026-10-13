@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeftRight, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
+import { ArrowLeftRight, CircleCheck, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
 import { Options } from "@/components/Options";
 import { PostcodeField } from "@/components/PostcodeField";
@@ -22,9 +22,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Dock } from "@/lib/bikes";
 import { options } from "@/lib/options";
+import type { LineStatus } from "@/lib/lines";
 import { lookupPostcode, type Place } from "@/lib/places";
 import {
   DAY_TYPE_BY_WEEKDAY,
+  SLOTS,
   TRAINS,
   betterEarlier,
   hardToBoard,
@@ -85,6 +87,15 @@ interface Live {
 
 type Stations = Record<string, [string, number, number]>;
 
+const SAVE_KEY = "commute";
+interface Saved {
+  from: string;
+  to: string;
+  time?: string;
+  fromPostcode?: string;
+  toPostcode?: string;
+}
+
 function nowRounded(): string {
   const now = new Date();
   return `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes() - (now.getMinutes() % 15)).padStart(2, "0")}`;
@@ -106,6 +117,9 @@ export function Planner() {
   // Loaded data remembers what it was loaded for, so stale results are never shown.
   const [loadedLinks, setLoadedLinks] = useState<{ day: string; links: Link[] } | null>(null);
   const [loadedLive, setLoadedLive] = useState<{ trip: string; live: Live } | null>(null);
+  const [loadedStatus, setLoadedStatus] = useState<{ lines: string; status: LineStatus[] } | null>(null);
+  // With no journey in the link, the first pass happens before the saved one is restored, so it's skipped.
+  const firstPass = useRef(!params.get("from"));
 
   const dayType = DAY_TYPE_BY_WEEKDAY[weekday];
   const trip = `${from}|${to}`;
@@ -123,9 +137,24 @@ export function Planner() {
   }, []);
 
   // Postcodes in a bookmarked link are looked up again; the station in the link stays as chosen.
+  // With no journey in the link, open the last one planned on this device.
   useEffect(() => {
-    const fromPostcode = params.get("fromPostcode");
-    const toPostcode = params.get("toPostcode");
+    let fromPostcode = params.get("fromPostcode");
+    let toPostcode = params.get("toPostcode");
+    if (!params.get("from")) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(SAVE_KEY) ?? "null") as Saved | null;
+        if (saved?.from && saved.to) {
+          /* eslint-disable react-hooks/set-state-in-effect -- restoring browser storage after hydration */
+          setFrom(saved.from);
+          setTo(saved.to);
+          if (saved.time) setTime(saved.time);
+          /* eslint-enable react-hooks/set-state-in-effect */
+          fromPostcode = saved.fromPostcode ?? null;
+          toPostcode = saved.toPostcode ?? null;
+        }
+      } catch {}
+    }
     if (fromPostcode) lookupPostcode(fromPostcode).then(setFromPlace).catch(() => {});
     if (toPostcode) lookupPostcode(toPostcode).then(setToPlace).catch(() => {});
     // Only on first load.
@@ -150,16 +179,50 @@ export function Planner() {
 
   // Keep the journey in the URL so it can be bookmarked. The day isn't saved: a bookmark opens on today.
   useEffect(() => {
+    if (firstPass.current) {
+      firstPass.current = false;
+      return;
+    }
     const query = new URLSearchParams({ from, to, time });
     if (fromPlace) query.set("fromPostcode", fromPlace.postcode);
     if (toPlace) query.set("toPostcode", toPlace.postcode);
     router.replace(`${pathname}?${query}`, { scroll: false });
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify({ from, to, time, fromPostcode: fromPlace?.postcode, toPostcode: toPlace?.postcode } satisfies Saved));
+    } catch {}
   }, [from, to, time, fromPlace, toPlace, pathname, router]);
 
   const [hours, mins] = time.split(":").map(Number);
   const slot = timeToSlot(hours || 0, mins || 0);
   const legs = useMemo(() => (links && from !== to ? plan(links, from, to, slot) : null), [links, from, to, slot]);
   const names = useMemo(() => Object.keys(stations), [stations]);
+  const lines = legs ? [...new Set(legs.map((leg) => leg.line))].sort().join(",") : "";
+  const status = loadedStatus?.lines === lines ? loadedStatus.status : null;
+
+  useEffect(() => {
+    if (!lines) return;
+    const controller = new AbortController();
+    fetch(`/api/status?${new URLSearchParams({ lines })}`, { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: LineStatus[] | null) => data && setLoadedStatus({ lines, status: data }))
+      .catch(() => {}); // the card just doesn't show live status
+    return () => controller.abort();
+  }, [lines]);
+
+  // How crowded the trip is if you leave up to 45 minutes earlier or later.
+  const nearby = useMemo(() => {
+    if (!links || from === to) return null;
+    return [-3, -2, -1, 0, 1, 2, 3].map((offset) => {
+      const s = (slot + offset + SLOTS) % SLOTS;
+      const route = plan(links, from, to, s);
+      const trips = route?.map((leg) => journey(leg.links, legSlot(s, leg), TRAINS[leg.line])) ?? [];
+      return {
+        slot: s,
+        level: route ? overall(trips.map((t) => t.level)) : null,
+        fullDoors: route ? route.some((leg, i) => hardToBoard(trips[i].people, TRAINS[leg.line])) : false,
+      };
+    });
+  }, [links, from, to, slot]);
   const ways = useMemo(
     () =>
       links && legs && stations[from] && stations[to]
@@ -268,6 +331,9 @@ export function Planner() {
         ) : (
           <>
             <JourneyCard
+              status={status}
+              nearby={nearby}
+              onTime={(s) => setTime(slotLabel(s))}
               legs={legs}
               slot={slot}
               tubeMinutes={live?.tubeMinutes ?? null}
@@ -327,8 +393,19 @@ function LineLabel({ line }: { line: string }) {
   );
 }
 
-function JourneyCard(props: { legs: Leg[]; slot: number; tubeMinutes: number | null; doorMinutes: number | null; from: string }) {
-  const { legs, slot, tubeMinutes, doorMinutes, from } = props;
+type Nearby = { slot: number; level: Overall | null; fullDoors: boolean }[];
+
+function JourneyCard(props: {
+  legs: Leg[];
+  slot: number;
+  tubeMinutes: number | null;
+  doorMinutes: number | null;
+  from: string;
+  status: LineStatus[] | null;
+  nearby: Nearby | null;
+  onTime: (slot: number) => void;
+}) {
+  const { legs, slot, tubeMinutes, doorMinutes, from, status, nearby, onTime } = props;
   const trips = legs.map((leg) => journey(leg.links, legSlot(slot, leg), TRAINS[leg.line]));
   const summary = overall(trips.map((t) => t.level));
   const stops = legs.reduce((n, leg) => n + leg.links.length, 0);
@@ -370,6 +447,7 @@ function JourneyCard(props: { legs: Leg[]; slot: number; tubeMinutes: number | n
             </span>
           </p>
         )}
+        <LiveStatus status={status} lines={legs.map((leg) => leg.line)} />
         {earlier && earlier[1] !== "packed" ? (
           <Tip>
             Leave at <strong>{slotLabel(earlier[0])}</strong> and {TIP[earlier[1]]}.
@@ -379,8 +457,74 @@ function JourneyCard(props: { legs: Leg[]; slot: number; tubeMinutes: number | n
             On the {first.line} line, seats usually free up from <strong>{trips[0].seatFrom}</strong>.
           </Tip>
         ) : null}
+        {nearby && <LeaveTimes nearby={nearby} slot={slot} onTime={onTime} />}
       </CardContent>
     </Card>
+  );
+}
+
+const SHORT: Record<Overall, { text: string; tone: string }> = {
+  seat: { text: "Seat", tone: "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-100" },
+  maybe: { text: "Maybe", tone: "bg-blue-100 text-blue-900 dark:bg-blue-950 dark:text-blue-100" },
+  part: { text: "Part", tone: "bg-blue-100 text-blue-900 dark:bg-blue-950 dark:text-blue-100" },
+  stand: { text: "Stand", tone: "bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-100" },
+  packed: { text: "Packed", tone: "bg-red-100 text-red-900 dark:bg-red-950 dark:text-red-100" },
+};
+
+/** The same trip leaving up to 45 minutes either side, so you can pick a calmer time. */
+function LeaveTimes({ nearby, slot, onTime }: { nearby: Nearby; slot: number; onTime: (slot: number) => void }) {
+  return (
+    <div className="space-y-1.5">
+      <p className="text-xs font-medium text-muted-foreground">If you leave at…</p>
+      <div className="grid grid-cols-7 gap-1">
+        {nearby.map((n) => (
+          <button
+            key={n.slot}
+            type="button"
+            onClick={() => onTime(n.slot)}
+            aria-pressed={n.slot === slot}
+            className={`rounded-md px-0.5 py-1.5 text-center text-xs ${n.level ? SHORT[n.level].tone : "bg-muted text-muted-foreground"} ${n.slot === slot ? "ring-2 ring-foreground" : "hover:opacity-80"}`}
+          >
+            <span className="block tabular-nums">{slotLabel(n.slot)}</span>
+            <span className="block font-medium">
+              {n.level ? SHORT[n.level].text : "–"}
+              {n.fullDoors && <span aria-label="some trains too full to get on"> !</span>}
+            </span>
+          </button>
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground">&ldquo;!&rdquo; means some trains may be too full to get on.</p>
+    </div>
+  );
+}
+
+/** Live service on the lines this journey uses, from TfL. */
+function LiveStatus({ status, lines }: { status: LineStatus[] | null; lines: string[] }) {
+  if (!status) return null;
+  // One entry per line, the worst status first (the list only has this journey's lines).
+  const worst = new Map<string, LineStatus>();
+  for (const s of status) if (!worst.has(s.line)) worst.set(s.line, s);
+  const problems = [...worst.values()].filter((s) => s.severity < 10);
+  if (!problems.length) {
+    return (
+      <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <CircleCheck className="size-3.5 text-emerald-600" />
+        Good service on {lines.length > 1 ? "these lines" : `the ${lines[0]} line`} right now.
+      </p>
+    );
+  }
+  return (
+    <div className="space-y-1.5">
+      {problems.map((p) => (
+        <div key={p.line} className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-950 dark:bg-red-950 dark:text-red-50">
+          <p className="flex items-center gap-1.5 font-medium">
+            <TriangleAlert className="size-4 shrink-0 text-red-600" />
+            {p.line}: {p.status}
+          </p>
+          {p.reason && <p className="mt-0.5 text-xs">{p.reason}</p>}
+        </div>
+      ))}
+    </div>
   );
 }
 
