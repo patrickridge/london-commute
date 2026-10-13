@@ -8,13 +8,27 @@ import type { PushSubscription } from "web-push";
 
 import type { Commute } from "./alerts";
 
-export interface Subscriber {
-  id: string;
-  subscription: PushSubscription;
-  commute: Commute;
+export interface SavedCommute extends Commute {
   /** London date of the last alert, "YYYY-MM-DD" */
   lastSent: string | null;
 }
+
+export interface Subscriber {
+  id: string;
+  subscription: PushSubscription;
+  /** Up to MAX_COMMUTES, say to work and home again. */
+  commutes: SavedCommute[];
+}
+
+export const MAX_COMMUTES = 3;
+
+/** The same journey, whatever the time or days. */
+export const sameTrip = (a: Commute, b: Commute) => a.from === b.from && a.to === b.to;
+
+// Sign-ups from before several commutes were allowed hold one `commute`.
+type Stored = Subscriber | (Omit<Subscriber, "commutes"> & { commute: Commute; lastSent: string | null });
+const upgrade = (s: Stored | null): Subscriber | null =>
+  !s ? null : "commutes" in s ? s : { id: s.id, subscription: s.subscription, commutes: [{ ...s.commute, lastSent: s.lastSent }] };
 
 const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
 const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -37,7 +51,7 @@ export async function save(s: Subscriber) {
 
 export async function find(id: string): Promise<Subscriber | null> {
   if (!redis) return memory.get(id) ?? null;
-  return redis.get<Subscriber>(key(id));
+  return upgrade(await redis.get<Stored>(key(id)));
 }
 
 export async function remove(id: string) {
@@ -50,6 +64,6 @@ export async function all(): Promise<Subscriber[]> {
   if (!redis) return [...memory.values()];
   const ids = await redis.smembers(INDEX);
   if (!ids.length) return [];
-  const found = await redis.mget<(Subscriber | null)[]>(...ids.map(key));
-  return found.filter((s): s is Subscriber => s !== null);
+  const found = await redis.mget<(Stored | null)[]>(...ids.map(key));
+  return found.map(upgrade).filter((s): s is Subscriber => s !== null);
 }

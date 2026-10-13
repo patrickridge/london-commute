@@ -19,8 +19,20 @@ const DAYS = [
   { day: 0, label: "S", name: "Sunday" },
 ];
 
-type Saved = { endpoint: string; commute: Commute };
+type Saved = { endpoint: string; commutes: Commute[] };
 type Support = "unknown" | "yes" | "no" | "add-to-home-screen";
+
+const MAX_COMMUTES = 3;
+const sameTrip = (a: Commute, b: { from: string; to: string }) => a.from === b.from && a.to === b.to;
+
+/** "Mon–Fri", "Every day", "Mon, Wed, Fri". */
+function dayList(days: number[]) {
+  const key = [...days].sort().join("");
+  if (key === "12345") return "Mon–Fri";
+  if (key === "0123456") return "Every day";
+  if (key === "06") return "Weekends";
+  return DAYS.filter((d) => days.includes(d.day)).map((d) => d.name.slice(0, 3)).join(", ");
+}
 
 /** Push wants the server's public key as bytes. */
 function keyBytes(base64url: string) {
@@ -34,7 +46,26 @@ async function subscription() {
   return (await registration.pushManager.getSubscription()) ?? registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(PUBLIC_KEY!) });
 }
 
-/** Turn on alerts for the journey on screen: a notification before leaving when there are delays or a calmer time. */
+function load(): Saved | null {
+  try {
+    const stored = JSON.parse(localStorage.getItem(SAVE_KEY) ?? "null") as (Saved & { commute?: Commute }) | null;
+    if (!stored) return null;
+    // Saved before several journeys were allowed.
+    if (stored.commute) return { endpoint: stored.endpoint, commutes: [stored.commute] };
+    return stored.commutes?.length ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+function store(saved: Saved | null) {
+  try {
+    if (saved) localStorage.setItem(SAVE_KEY, JSON.stringify(saved));
+    else localStorage.removeItem(SAVE_KEY);
+  } catch {}
+}
+
+/** Alerts for up to three regular journeys: a notification before leaving when there are delays or a calmer time. */
 export function Alerts({ from, to, time }: { from: string; to: string; time: string }) {
   const [support, setSupport] = useState<Support>("unknown");
   const [saved, setSaved] = useState<Saved | null>(null);
@@ -49,37 +80,41 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
     const installed = window.matchMedia("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
     /* eslint-disable react-hooks/set-state-in-effect -- reading browser capabilities and storage after hydration */
     setSupport(capable && (!iPhone || installed) ? "yes" : iPhone && !installed ? "add-to-home-screen" : "no");
-    try {
-      const stored = JSON.parse(localStorage.getItem(SAVE_KEY) ?? "null") as Saved | null;
-      if (stored) {
-        setSaved(stored);
-        setDays(stored.commute.days);
-        setDaily(stored.commute.mode === "daily");
-      }
-    } catch {}
+    setSaved(load());
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
+
+  // Show the settings of the journey on screen, if it already has alerts.
+  const current = saved?.commutes.find((c) => sameTrip(c, { from, to }));
+  useEffect(() => {
+    if (!current) return;
+    /* eslint-disable react-hooks/set-state-in-effect -- following the journey on screen */
+    setDays(current.days);
+    setDaily(current.mode === "daily");
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [current]);
 
   if (!PUBLIC_KEY || support === "unknown" || support === "no") return null;
 
   const commute: Commute = { from, to, time, days, mode: daily ? "daily" : "issues" };
-  const onForThis = saved && saved.commute.from === from && saved.commute.to === to && saved.commute.time === time;
+  const full = !current && (saved?.commutes.length ?? 0) >= MAX_COMMUTES;
 
   const turnOn = async () => {
     setBusy(true);
     setMessage(undefined);
     try {
       if ((await Notification.requestPermission()) !== "granted") {
-        setMessage("Notifications are blocked for this site. Allow them in your browser's settings, then try again.");
+        setMessage("Notifications are blocked for this site. Allow them in your settings, then try again.");
         return;
       }
       const sub = (await subscription()).toJSON();
       const res = await fetch("/api/alerts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ subscription: sub, commute }) });
-      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "Couldn't turn alerts on");
-      const next = { endpoint: sub.endpoint!, commute };
-      localStorage.setItem(SAVE_KEY, JSON.stringify(next));
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error ?? "Couldn't turn alerts on");
+      const next = { endpoint: sub.endpoint!, commutes: body.commutes as Commute[] };
+      store(next);
       setSaved(next);
-      setMessage("Alerts are on. Send a test to check they arrive.");
+      setMessage(current ? "Updated." : "Alerts are on. Send a test to check they arrive.");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Couldn't turn alerts on.");
     } finally {
@@ -87,23 +122,29 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
     }
   };
 
-  const turnOff = async () => {
+  const removeOne = async (c: Commute) => {
     setBusy(true);
     try {
-      await fetch("/api/alerts", { method: "DELETE", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint: saved!.endpoint }) });
-      const registration = await navigator.serviceWorker.getRegistration();
-      await (await registration?.pushManager.getSubscription())?.unsubscribe();
+      await fetch("/api/alerts", { method: "DELETE", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint: saved!.endpoint, from: c.from, to: c.to }) });
     } catch {}
-    localStorage.removeItem(SAVE_KEY);
-    setSaved(null);
-    setMessage("Alerts are off.");
+    const commutes = saved!.commutes.filter((x) => !sameTrip(x, c));
+    if (!commutes.length) {
+      try {
+        const registration = await navigator.serviceWorker.getRegistration();
+        await (await registration?.pushManager.getSubscription())?.unsubscribe();
+      } catch {}
+    }
+    const next = commutes.length ? { ...saved!, commutes } : null;
+    store(next);
+    setSaved(next);
+    setMessage(next ? undefined : "Alerts are off.");
     setBusy(false);
   };
 
-  const test = async () => {
+  const test = async (c: Commute) => {
     setBusy(true);
-    const res = await fetch("/api/alerts/test", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint: saved!.endpoint }) }).catch(() => null);
-    setMessage(res?.ok ? "Test sent. It should arrive in a few seconds." : "Couldn't send a test. Try turning alerts off and on again.");
+    const res = await fetch("/api/alerts/test", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint: saved!.endpoint, from: c.from, to: c.to }) }).catch(() => null);
+    setMessage(res?.ok ? "Test sent. It should arrive in a few seconds." : "Couldn't send a test. Try removing the alert and adding it again.");
     setBusy(false);
   };
 
@@ -115,7 +156,8 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
           Commute alerts
         </CardTitle>
         <CardDescription>
-          A notification about 30 minutes before you leave, only when it matters: delays on your lines, or a calmer time to go.
+          A notification shortly before you leave, only when it matters: delays on your lines and what to do instead, or a calmer time to go.
+          Up to {MAX_COMMUTES} journeys, say there and back.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -129,10 +171,32 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
           </p>
         ) : (
           <>
-            {saved && !onForThis && (
-              <p className="text-sm text-muted-foreground">
-                Alerts are on for {saved.commute.from} to {saved.commute.to} at {saved.commute.time}.
-              </p>
+            {saved && (
+              <ul className="divide-y rounded-lg border text-sm">
+                {saved.commutes.map((c) => (
+                  <li key={`${c.from}>${c.to}`} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
+                    <span>
+                      <span className="font-medium">
+                        {c.from} to {c.to}
+                      </span>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        · {c.time} · {dayList(c.days)}
+                        {c.mode === "daily" ? " · every time" : ""}
+                      </span>
+                    </span>
+                    <span className="flex gap-1">
+                      <Button size="sm" variant="outline" onClick={() => test(c)} disabled={busy}>
+                        Send a test
+                      </Button>
+                      <Button size="sm" variant="ghost" onClick={() => removeOne(c)} disabled={busy} aria-label={`Remove alerts for ${c.from} to ${c.to}`}>
+                        <BellOff />
+                        Remove
+                      </Button>
+                    </span>
+                  </li>
+                ))}
+              </ul>
             )}
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex gap-1" role="group" aria-label="Days to check">
@@ -157,26 +221,19 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
                 Also on good days
               </label>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={turnOn} disabled={busy || !days.length}>
-                <Bell />
-                {onForThis ? "Update alerts" : saved ? `Switch alerts to this journey` : `Alert me for the ${time}`}
-              </Button>
-              {saved && (
-                <>
-                  <Button variant="outline" onClick={test} disabled={busy}>
-                    Send a test
-                  </Button>
-                  <Button variant="ghost" onClick={turnOff} disabled={busy}>
-                    <BellOff />
-                    Turn off
-                  </Button>
-                </>
-              )}
-            </div>
+            <Button onClick={turnOn} disabled={busy || !days.length || full}>
+              <Bell />
+              {current ? `Update ${from} to ${to}` : `Alert me for the ${time} ${from} to ${to}`}
+            </Button>
+            {full && <p className="text-sm text-muted-foreground">You have alerts for {MAX_COMMUTES} journeys. Remove one to add this.</p>}
+            {!saved && <p className="text-sm text-muted-foreground">Allow notifications when asked, then send a test to check they arrive.</p>}
           </>
         )}
-        {message && <p className="text-sm text-muted-foreground" aria-live="polite">{message}</p>}
+        {message && (
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            {message}
+          </p>
+        )}
       </CardContent>
     </Card>
   );
