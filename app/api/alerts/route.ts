@@ -3,6 +3,7 @@ import type { PushSubscription } from "web-push";
 import type { Commute } from "@/lib/alerts";
 import { STATIONS } from "@/lib/network";
 import { pushConfigured } from "@/lib/push";
+import { type Route, TRAINS } from "@/lib/seats";
 import { find, idFor, MAX_COMMUTES, remove, sameTrip, save, storeConnected } from "@/lib/store";
 
 function valid(body: unknown): { subscription: PushSubscription; commute: Commute } | null {
@@ -13,7 +14,18 @@ function valid(body: unknown): { subscription: PushSubscription; commute: Commut
   if (!Array.isArray(commute.days) || !commute.days.length || commute.days.some((d) => !Number.isInteger(d) || d < 0 || d > 6)) return null;
   if (commute.mode !== "issues" && commute.mode !== "daily") return null;
   const { from, to, time, days, mode } = commute;
-  return { subscription: { endpoint: subscription.endpoint, keys: subscription.keys }, commute: { from, to, time, days: [...new Set(days)].sort(), mode } };
+  const route = validRoute(commute.route, from, to);
+  if (route === false) return null;
+  return { subscription: { endpoint: subscription.endpoint, keys: subscription.keys }, commute: { from, to, time, days: [...new Set(days)].sort(), mode, ...(route && { route }) } };
+}
+
+/** A saved route must join up from start to end on real lines; false if it's malformed. */
+function validRoute(route: unknown, from: string, to: string): Route | null | false {
+  if (route === undefined || route === null) return null;
+  if (!Array.isArray(route) || !route.length || route.length > 4) return false;
+  const legs = route.map(({ line, from, to }) => ({ line, from, to })) as Route;
+  const joined = legs.every((leg, i) => TRAINS[leg.line] && STATIONS[leg.from] && STATIONS[leg.to] && (i === 0 ? leg.from === from : leg.from === legs[i - 1].to));
+  return joined && legs.at(-1)!.to === to ? legs : false;
 }
 
 /** Sign this browser up for alerts about a commute, or update the times for one it already has. */
@@ -27,7 +39,7 @@ export async function POST(request: Request) {
   if (others.length >= MAX_COMMUTES) return Response.json({ error: `You can have alerts for up to ${MAX_COMMUTES} journeys. Remove one first.` }, { status: 400 });
   const commutes = [...others, { ...signup.commute, lastSent: null }];
   await save({ id, subscription: signup.subscription, commutes });
-  return Response.json({ commutes: commutes.map(({ from, to, time, days, mode }) => ({ from, to, time, days, mode })) });
+  return Response.json({ commutes: commutes.map(({ from, to, time, days, mode, route }) => ({ from, to, time, days, mode, route })) });
 }
 
 /** Stop alerts for one journey, given `from` and `to`, or for all of them. */

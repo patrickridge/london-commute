@@ -2,9 +2,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { type Commute, compose, isDue, londonTime } from "./alerts";
+import { type Commute, compose, isDue, londonTime, routeName } from "./alerts";
 import { parseLineStatus } from "./lines";
-import { toLinks, type RawLink } from "./seats";
+import { routeChoices, toLinks, toRoute, type RawLink } from "./seats";
 
 const read = (p: string) => JSON.parse(readFileSync(join(__dirname, "..", p), "utf8"));
 const links = toLinks(read("public/data/links-TWT.json") as RawLink[]);
@@ -68,5 +68,13 @@ describe("compose", () => {
 
   it("always says something for a test notification", () => {
     expect(compose(commute({ from: "Stratford", to: "Bond Street", time: "11:00" }), links, good, { force: true })).not.toBeNull();
+  });
+
+  it("follows the route you actually take", () => {
+    const choices = routeChoices(links, "Balham", "Warren Street", 34).map(toRoute);
+    expect(choices.map(routeName)).toEqual(["Northern line all the way", "Northern, change at Stockwell for Victoria"]);
+    const usual = commute({ from: "Balham", to: "Warren Street", route: choices[1] });
+    expect(compose(usual, links, [st("Victoria", 6, "Severe Delays")])!.body).toBe("08:30 to Warren Street: leave by 08:15, or stay on the Northern line.");
+    expect(compose(usual, links, [st("Northern", 6, "Severe Delays")])!.body).toBe("08:30 to Warren Street: leave by 08:15.");
   });
 });

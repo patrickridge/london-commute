@@ -221,3 +221,38 @@ export function overall(levels: (Level | null)[]): Overall | null {
   if (known.includes("seat") || known.includes("maybe")) return "part";
   return known.reduce((worst, lv) => (LEVELS.indexOf(lv) > LEVELS.indexOf(worst) ? lv : worst));
 }
+
+// ---------- your usual route ----------
+
+/** A route as the stations you change at, so a commute can keep the way you actually go. */
+export type Route = { line: string; from: string; to: string }[];
+
+export const toRoute = (legs: Leg[]): Route => legs.map((leg) => ({ line: leg.line, from: leg.links[0].from, to: leg.links.at(-1)!.to }));
+
+export const sameRoute = (a: Route, b: Route) => a.length === b.length && a.every((leg, i) => leg.line === b[i].line && leg.from === b[i].from && leg.to === b[i].to);
+
+/** The legs of a saved route at this time, or null if part of it isn't running. */
+export function followRoute(links: Link[], route: Route, slot: number): Leg[] | null {
+  const path: Link[] = [];
+  for (const leg of route) {
+    const onLine = links.filter((link) => link.line === leg.line);
+    const stretch = plan(onLine, leg.from, leg.to, slot);
+    if (!stretch || stretch.length !== 1) return null;
+    path.push(...stretch[0].links);
+  }
+  return toLegs(path);
+}
+
+/** The best route plus up to two sensible others, each found by steering away from one line of the best. */
+export function routeChoices(links: Link[], origin: string, dest: string, slot: number): Leg[][] {
+  const best = plan(links, origin, dest, slot);
+  if (!best) return [];
+  const choices = [best];
+  for (const line of new Set(best.map((leg) => leg.line))) {
+    const other = plan(links, origin, dest, slot, new Set([line]));
+    const stops = (legs: Leg[]) => legs.reduce((n, leg) => n + leg.links.length, 0);
+    // Keep it only if it's a real alternative: at most 8 more stops and one more change.
+    if (other && other.length <= best.length + 1 && stops(other) <= stops(best) + 8 && !choices.some((c) => sameRoute(toRoute(c), toRoute(other)))) choices.push(other);
+  }
+  return choices.slice(0, 3);
+}

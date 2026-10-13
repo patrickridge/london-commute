@@ -1,8 +1,8 @@
-import { compose, londonTime } from "@/lib/alerts";
+import { compose, legsFor, londonTime } from "@/lib/alerts";
 import { LINE_IDS } from "@/lib/lines";
 import { linksFor } from "@/lib/network";
 import { send } from "@/lib/push";
-import { plan, timeToSlot } from "@/lib/seats";
+import { timeToSlot } from "@/lib/seats";
 import { find, idFor, remove } from "@/lib/store";
 import { getLineStatus } from "@/lib/tfl";
 
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   if (!subscriber || !commute) return Response.json({ error: "Turn alerts on first" }, { status: 404 });
 
   const links = linksFor(londonTime(new Date()).weekday);
-  const legs = plan(links, commute.from, commute.to, timeToSlot(...(commute.time.split(":").map(Number) as [number, number])));
+  const legs = legsFor(links, commute, timeToSlot(...(commute.time.split(":").map(Number) as [number, number])));
   const ids = [...new Set((legs ?? []).flatMap((leg) => LINE_IDS[leg.line] ?? []))];
   const status = ids.length ? await getLineStatus(ids.sort()).catch(() => []) : [];
   const alert = compose(commute, links, status, { force: true })!;

@@ -3,7 +3,7 @@
 // can be tested on its own.
 
 import type { LineStatus } from "./lines";
-import { hardToBoard, journey, type Leg, legSlot, type Link, type Overall, overall, plan, SLOTS, slotLabel, timeToSlot, TRAINS } from "./seats";
+import { followRoute, hardToBoard, journey, type Leg, legSlot, type Link, type Overall, overall, plan, type Route, SLOTS, slotLabel, timeToSlot, TRAINS } from "./seats";
 
 export interface Commute {
   from: string;
@@ -14,6 +14,8 @@ export interface Commute {
   days: number[];
   /** "issues": only when something's wrong or a better time exists. "daily": a summary every time. */
   mode: "issues" | "daily";
+  /** The way you usually go, if not the planner's first choice. */
+  route?: Route;
 }
 
 export interface Alert {
@@ -71,6 +73,13 @@ export function isDue(commute: Commute, now: LondonTime, lastSent: string | null
 
 const RANK: Record<Overall, number> = { seat: 0, maybe: 1, part: 2, stand: 3, packed: 4 };
 
+/** "Northern line all the way", "Northern, change at Stockwell for Victoria". */
+export function routeName(route: Route) {
+  const name = (line: string) => line.replace(/ line$/, "");
+  if (route.length === 1) return `${name(route[0].line)}${route[0].line === "DLR" ? "" : " line"} all the way`;
+  return [name(route[0].line), ...route.slice(1).map((leg) => `change at ${leg.from} for ${name(leg.line)}`)].join(", ");
+}
+
 /** "Victoria line", "DLR", "Elizabeth line". */
 const label = (line: string) => (line === "DLR" ? line : `${line.replace(/ line$/, "")} line`);
 export const lineName = (line: string) => `the ${label(line)}`;
@@ -90,17 +99,25 @@ function extraMinutes(severity: number) {
 
 const clock = (minutes: number) => `${String(Math.floor((minutes + 1440) % 1440 / 60)).padStart(2, "0")}:${String((minutes + 1440) % 60).padStart(2, "0")}`;
 
-/** "change at Stockwell for the Victoria line", or "take the Elizabeth line to Tottenham Court Road, then the Central line". */
+/** "change at Stockwell for the Victoria line", "stay on the Northern line", or "take the Elizabeth line to Tottenham Court Road, then the Central line". */
 function describe(route: Leg[], usual: Leg[]) {
   const end = (leg: Leg) => leg.links.at(-1)!.to;
-  if (route[0].line === usual[0].line) return route.slice(1).map((leg) => `change at ${leg.links[0].from} for ${lineName(leg.line)}`).join(", then ");
+  if (route[0].line === usual[0].line) {
+    if (route.length === 1) return `stay on ${lineName(route[0].line)}`;
+    return route.slice(1).map((leg) => `change at ${leg.links[0].from} for ${lineName(leg.line)}`).join(", then ");
+  }
   return route.map((leg, i) => (i === 0 ? `take ${lineName(leg.line)} to ${end(leg)}` : i === route.length - 1 ? `then ${lineName(leg.line)}` : `then ${lineName(leg.line)} to ${end(leg)}`)).join(", ");
 }
 
 const stopsOn = (legs: Leg[], lines: ReadonlySet<string>) => legs.reduce((n, leg) => n + (lines.has(leg.line) ? leg.links.length : 0), 0);
 
+/** The commute's legs at this time: its saved route if that's running, otherwise the planner's. */
+export function legsFor(links: Link[], commute: Commute, slot: number): Leg[] | null {
+  return (commute.route && followRoute(links, commute.route, slot)) || plan(links, commute.from, commute.to, slot);
+}
+
 function crowding(links: Link[], commute: Commute, slot: number) {
-  const legs = plan(links, commute.from, commute.to, slot);
+  const legs = legsFor(links, commute, slot);
   if (!legs) return null;
   const trips = legs.map((leg) => journey(leg.links, legSlot(slot, leg), TRAINS[leg.line]));
   return { crowd: overall(trips.map((t) => t.level)), fullDoors: legs.some((leg, i) => hardToBoard(trips[i].people, TRAINS[leg.line])) };
@@ -125,7 +142,7 @@ function calmerTime(links: Link[], commute: Commute, slot: number, crowd: Overal
 export function compose(commute: Commute, links: Link[], status: LineStatus[], { force = false } = {}): Alert | null {
   const url = `/?${new URLSearchParams({ from: commute.from, to: commute.to, time: commute.time })}`;
   const slot = timeToSlot(...(commute.time.split(":").map(Number) as [number, number]));
-  const legs = plan(links, commute.from, commute.to, slot);
+  const legs = legsFor(links, commute, slot);
   if (!legs) return force ? { title: "No route at your usual time", body: `No trains from ${commute.from} to ${commute.to} at ${commute.time}.`, url } : null;
   const trip = `${commute.time} to ${commute.to}`;
 

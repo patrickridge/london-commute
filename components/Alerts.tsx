@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Commute } from "@/lib/alerts";
+import { type Commute, routeName } from "@/lib/alerts";
+import { type Route, sameRoute } from "@/lib/seats";
 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
 const SAVE_KEY = "alerts";
@@ -66,11 +67,12 @@ function store(saved: Saved | null) {
 }
 
 /** Alerts for up to three regular journeys: a notification before leaving when there are delays or a calmer time. */
-export function Alerts({ from, to, time }: { from: string; to: string; time: string }) {
+export function Alerts({ from, to, time, routes }: { from: string; to: string; time: string; routes: Route[] }) {
   const [support, setSupport] = useState<Support>("unknown");
   const [saved, setSaved] = useState<Saved | null>(null);
   const [days, setDays] = useState([1, 2, 3, 4, 5]);
   const [daily, setDaily] = useState(false);
+  const [pick, setPick] = useState(0);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string>();
 
@@ -91,12 +93,14 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
     /* eslint-disable react-hooks/set-state-in-effect -- following the journey on screen */
     setDays(current.days);
     setDaily(current.mode === "daily");
+    setPick(Math.max(0, routes.findIndex((r) => current.route && sameRoute(r, current.route))));
     /* eslint-enable react-hooks/set-state-in-effect */
-  }, [current]);
+  }, [current, routes]);
 
   if (!PUBLIC_KEY || support === "unknown" || support === "no") return null;
 
-  const commute: Commute = { from, to, time, days, mode: daily ? "daily" : "issues" };
+  const route = routes[pick] ?? routes[0];
+  const commute: Commute = { from, to, time, days, mode: daily ? "daily" : "issues", ...(route && { route }) };
   const full = !current && (saved?.commutes.length ?? 0) >= MAX_COMMUTES;
 
   const turnOn = async () => {
@@ -184,6 +188,7 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
                         · {c.time} · {dayList(c.days)}
                         {c.mode === "daily" ? " · every time" : ""}
                       </span>
+                      {c.route && <span className="block text-xs text-muted-foreground">{routeName(c.route)}</span>}
                     </span>
                     <span className="flex gap-1">
                       <Button size="sm" variant="outline" onClick={() => test(c)} disabled={busy}>
@@ -197,6 +202,17 @@ export function Alerts({ from, to, time }: { from: string; to: string; time: str
                   </li>
                 ))}
               </ul>
+            )}
+            {routes.length > 1 && (
+              <fieldset className="space-y-1.5">
+                <legend className="mb-1.5 text-sm font-medium">Your usual way</legend>
+                {routes.map((r, i) => (
+                  <label key={routeName(r)} className="flex items-center gap-2 text-sm">
+                    <input type="radio" name="usual-route" checked={pick === i} onChange={() => setPick(i)} className="accent-primary" />
+                    {routeName(r)}
+                  </label>
+                ))}
+              </fieldset>
             )}
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex gap-1" role="group" aria-label="Days to check">

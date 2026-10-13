@@ -36,9 +36,11 @@ import {
   legSlot,
   overall,
   plan,
+  routeChoices,
   slotLabel,
   timeToSlot,
   toLinks,
+  toRoute,
   type Leg,
   type Level,
   type Link,
@@ -200,6 +202,7 @@ export function Planner() {
   const [hours, mins] = time.split(":").map(Number);
   const slot = timeToSlot(hours || 0, mins || 0);
   const legs = useMemo(() => (links && from !== to ? plan(links, from, to, slot) : null), [links, from, to, slot]);
+  const choices = useMemo(() => (links && from !== to ? routeChoices(links, from, to, slot).map(toRoute) : []), [links, from, to, slot]);
   const names = useMemo(() => Object.keys(stations), [stations]);
   const lines = legs ? [...new Set(legs.map((leg) => leg.line))].sort().join(",") : "";
   const status = loadedStatus?.lines === lines ? loadedStatus.status : null;
@@ -345,7 +348,7 @@ export function Planner() {
               doorMinutes={fromPlace || toPlace ? (ways?.find((o) => o.kind === "tube")?.minutes ?? null) : null}
               from={from}
             />
-            <Alerts from={from} to={to} time={time} />
+            <Alerts from={from} to={to} time={time} routes={choices} />
             {ways && <Options list={ways} liveBikes={docks !== null} />}
             <TrainChart
               people={legs[0].links[0].perTrain}

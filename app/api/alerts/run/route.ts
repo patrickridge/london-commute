@@ -1,8 +1,8 @@
-import { compose, isDue, londonTime } from "@/lib/alerts";
+import { compose, isDue, legsFor, londonTime } from "@/lib/alerts";
 import { LINE_IDS } from "@/lib/lines";
 import { linksFor } from "@/lib/network";
 import { send } from "@/lib/push";
-import { plan, timeToSlot } from "@/lib/seats";
+import { timeToSlot } from "@/lib/seats";
 import { all, remove, save } from "@/lib/store";
 import { getLineStatus } from "@/lib/tfl";
 
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
   const counts = { due: due.length, sent: 0, quiet: 0, gone: 0, failed: 0 };
 
   // One TfL call covering every line any due commute uses.
-  const routes = due.map(({ commute }) => plan(links, commute.from, commute.to, timeToSlot(...(commute.time.split(":").map(Number) as [number, number]))));
+  const routes = due.map(({ commute }) => legsFor(links, commute, timeToSlot(...(commute.time.split(":").map(Number) as [number, number]))));
   const ids = [...new Set(routes.flatMap((legs) => (legs ?? []).flatMap((leg) => LINE_IDS[leg.line] ?? [])))].sort();
   const status = ids.length ? await getLineStatus(ids).catch(() => []) : [];
 
