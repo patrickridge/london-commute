@@ -14,7 +14,7 @@ When I moved to London I wanted to know three things about my commute: how long 
 
 ## How it works
 
-**How full your train is.** TfL's NUMBAT dataset (2025) estimates, for a typical day, how many people travel on every stretch of the Underground and Elizabeth line in each 15-minute band, and how many trains run. Dividing one by the other gives the average number of people on each train, which is compared with its seats and total capacity (from TfL's rolling stock information sheets):
+**How full your train is.** TfL's NUMBAT dataset (2025) estimates, for a typical day, how many people travel on every stretch of the Underground, Elizabeth line, DLR and Overground in each 15-minute band, and how many trains run. Dividing one by the other gives the average number of people on each train, which is compared with its seats and total capacity (from TfL's rolling stock information sheets and data sheets):
 
 | People per train | Answer |
 |---|---|
@@ -54,7 +54,7 @@ Journey answers are worked out in the browser from one day's data file (about 90
 
 - Typical days only: no strikes, delays or events.
 - Averages over the whole train. Some carriages will be fuller than others.
-- Underground and Elizabeth line only. Metropolitan line fast trains aren't included.
+- The Overground's Liberty, Lioness, Suffragette and Weaver lines aren't included: TfL doesn't publish seat and capacity figures for their Class 710 trains, and the seat answer depends on them. Metropolitan line fast trains aren't included either.
 - Bike and space counts are live, so they only tell you about right now.
 - Santander Cycles cover central and inner London; many outer stations have no dock nearby. Lime and other dockless bikes don't publish open data for London.
 
@@ -105,7 +105,7 @@ Built with Next.js, TypeScript, Tailwind CSS, shadcn/ui and Recharts.
 ## What I'd do next
 
 1. Predict bikes and spaces at a dock for a chosen time, from logged dock history.
-2. The Overground and DLR, which are in the same TfL dataset.
+2. The rest of the Overground, once TfL publishes capacities for its Class 710 trains.
 3. Live line status next to the journey, so disruption shows up.
 
 ## Data and licence

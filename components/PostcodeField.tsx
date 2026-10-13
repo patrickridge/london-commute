@@ -71,7 +71,7 @@ export function PostcodeField({ id, place, station, stations, onPlace, onStation
       const found = await lookupPostcode(text);
       const near = found ? nearestStations(stations, found) : [];
       if (!found) setError("Couldn't find that postcode.");
-      else if (!near.length) setError("No Underground or Elizabeth line station within a 25-minute walk.");
+      else if (!near.length) setError("No station within a 25-minute walk.");
       else {
         onPlace(found, near[0].name);
         setOpen(false);

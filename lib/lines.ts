@@ -13,6 +13,9 @@ export const LINE_IDS: Record<string, string[]> = {
   Piccadilly: ["piccadilly"],
   Victoria: ["victoria"],
   "Waterloo & City": ["waterloo-city"],
+  DLR: ["dlr"],
+  Mildmay: ["mildmay"],
+  Windrush: ["windrush"],
 };
 
 export interface LineStatus {

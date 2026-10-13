@@ -10,7 +10,7 @@ const REPO = "https://github.com/patrickridge/london-commute";
 const EXPLAINERS = [
   {
     title: "How full your train is",
-    body: "TfL counts how many people travel on every stretch of the Underground and Elizabeth line, every 15 minutes. Dividing by the number of trains gives the typical crowd on each train, which is compared with its seats.",
+    body: "TfL counts how many people travel on every stretch of the Underground, Elizabeth line, DLR and Overground, every 15 minutes. Dividing by the number of trains gives the typical crowd on each train, which is compared with its seats.",
   },
   {
     title: "Your route",
@@ -46,7 +46,7 @@ export default function Home() {
 
       <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         <section className="max-w-2xl">
-          <p className="text-sm font-medium text-primary">Underground and Elizabeth line</p>
+          <p className="text-sm font-medium text-primary">Underground, Elizabeth line, DLR and Overground</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Plan your commute</h1>
           <p className="mt-3 text-muted-foreground">
             How long it takes, whether you&apos;ll get a seat, and whether getting off early, staying on or biking part of the way is better. Based on

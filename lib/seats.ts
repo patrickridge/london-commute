@@ -23,6 +23,11 @@ export const TRAINS: Record<string, Train> = {
   Piccadilly: { seats: 228, capacity: 798 },
   Victoria: { seats: 288, capacity: 986 },
   "Waterloo & City": { seats: 136, capacity: 506 },
+  // TfL data sheets: DLR B07 vehicles (64 seats, 292 with standing) in 3-car trains; London
+  // Overground Class 378 five-car trains (186 seats, 906 standing at crush).
+  DLR: { seats: 192, capacity: 876 },
+  Mildmay: { seats: 186, capacity: 1092 },
+  Windrush: { seats: 186, capacity: 1092 },
 };
 
 // NUMBAT publishes five day types; JavaScript's getDay() counts from Sunday.

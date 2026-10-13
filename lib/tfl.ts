@@ -21,12 +21,12 @@ export async function getDocks(): Promise<Dock[]> {
   return parseDocks(await tfl("/BikePoint"));
 }
 
-/** Station-to-station time by Underground or Elizabeth line, from TfL's Journey Planner. */
+/** Station-to-station time by Underground, Elizabeth line, DLR or Overground, from TfL's Journey Planner. */
 export async function getTubeMinutes(fromId: string, toId: string): Promise<number | null> {
   "use cache";
   cacheLife("days");
   return parseJourneyMinutes(
-    await tfl(`/Journey/JourneyResults/${fromId}/to/${toId}`, { mode: "tube,elizabeth-line,walking" }),
+    await tfl(`/Journey/JourneyResults/${fromId}/to/${toId}`, { mode: "tube,elizabeth-line,dlr,overground,walking" }),
   );
 }
 

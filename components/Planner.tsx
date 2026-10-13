@@ -44,7 +44,7 @@ import {
   type RawLink,
 } from "@/lib/seats";
 
-const DEFAULT = { from: "Balham", to: "Oxford Circus" };
+const DEFAULT = { from: "Waterloo", to: "Canary Wharf" };
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const DAY_TYPE_NAMES = { MON: "Monday", TWT: "Tuesday to Thursday", FRI: "Friday", SAT: "Saturday", SUN: "Sunday" };
 
@@ -79,6 +79,9 @@ const LINE_COLOURS: Record<string, [string, string]> = {
   Piccadilly: ["#003688", "#fff"],
   Victoria: ["#0098D4", "#fff"],
   "Waterloo & City": ["#95CDBA", "#1c1c1c"],
+  DLR: ["#00A4A7", "#fff"],
+  Mildmay: ["#2774AE", "#fff"],
+  Windrush: ["#D22730", "#fff"],
 };
 
 interface Live {
@@ -246,7 +249,7 @@ export function Planner() {
       <Card className="lg:sticky lg:top-20">
         <CardHeader>
           <CardTitle>Your commute</CardTitle>
-          <CardDescription>Any two Underground or Elizabeth line stations.</CardDescription>
+          <CardDescription>Any two Underground, Elizabeth line, DLR or Overground (Mildmay and Windrush) stations.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -326,7 +329,7 @@ export function Planner() {
           <Message>Loading…</Message>
         ) : !legs ? (
           <Message>
-            No Underground or Elizabeth line route from {from} to {to} at {slotLabel(slot)}.
+            No route from {from} to {to} at {slotLabel(slot)}.
           </Message>
         ) : (
           <>

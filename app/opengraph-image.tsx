@@ -23,7 +23,7 @@ export default function OpenGraphImage() {
             How long it takes, whether you&apos;ll get a seat, and whether there&apos;s a better way to do it.
           </div>
         </div>
-        <div style={{ fontSize: 26, color: "#2563eb", fontWeight: 600 }}>Underground · Elizabeth line · Santander Cycles</div>
+        <div style={{ fontSize: 26, color: "#2563eb", fontWeight: 600 }}>Tube · Elizabeth line · DLR · Overground · Santander Cycles</div>
       </div>
     ),
     size,
