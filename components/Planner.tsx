@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftRight, CircleCheck, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
 import { Alerts } from "@/components/Alerts";
+import { routeName } from "@/lib/alerts";
 import { Options } from "@/components/Options";
 import { PostcodeField } from "@/components/PostcodeField";
 import { TrainChart } from "@/components/TrainChart";
@@ -35,6 +36,7 @@ import {
   journey,
   legSlot,
   overall,
+  followRoute,
   plan,
   routeChoices,
   slotLabel,
@@ -99,6 +101,7 @@ interface Saved {
   from: string;
   to: string;
   time?: string;
+  via?: string;
   fromPostcode?: string;
   toPostcode?: string;
 }
@@ -121,6 +124,8 @@ export function Planner() {
   const [to, setTo] = useState(params.get("to") ?? DEFAULT.to);
   const [weekday, setWeekday] = useState(() => new Date().getDay());
   const [time, setTime] = useState(params.get("time") ?? nowRounded());
+  // Where you change, for when you don't take the planner's first choice ("Stockwell").
+  const [via, setVia] = useState(params.get("via") ?? "");
   // Loaded data remembers what it was loaded for, so stale results are never shown.
   const [loadedLinks, setLoadedLinks] = useState<{ day: string; links: Link[] } | null>(null);
   const [loadedLive, setLoadedLive] = useState<{ trip: string; live: Live } | null>(null);
@@ -156,6 +161,7 @@ export function Planner() {
           setFrom(saved.from);
           setTo(saved.to);
           if (saved.time) setTime(saved.time);
+          if (saved.via) setVia(saved.via);
           /* eslint-enable react-hooks/set-state-in-effect */
           fromPostcode = saved.fromPostcode ?? null;
           toPostcode = saved.toPostcode ?? null;
@@ -184,6 +190,14 @@ export function Planner() {
     return () => controller.abort();
   }, [from, to]);
 
+  const [hours, mins] = time.split(":").map(Number);
+  const slot = timeToSlot(hours || 0, mins || 0);
+  const choices = useMemo(() => (links && from !== to ? routeChoices(links, from, to, slot) : []), [links, from, to, slot]);
+  const legs = choices.find((c) => changesOf(c) === via) ?? choices[0] ?? null;
+  const usual = useMemo(() => (legs ? toRoute(legs) : null), [legs]);
+  // Until the network has loaded, keep whatever route was asked for.
+  const chosenVia = !choices.length ? via : legs !== choices[0] ? changesOf(legs!) : "";
+
   // Keep the journey in the URL so it can be bookmarked. The day isn't saved: a bookmark opens on today.
   useEffect(() => {
     if (firstPass.current) {
@@ -191,18 +205,15 @@ export function Planner() {
       return;
     }
     const query = new URLSearchParams({ from, to, time });
+    if (chosenVia) query.set("via", chosenVia);
     if (fromPlace) query.set("fromPostcode", fromPlace.postcode);
     if (toPlace) query.set("toPostcode", toPlace.postcode);
     router.replace(`${pathname}?${query}`, { scroll: false });
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify({ from, to, time, fromPostcode: fromPlace?.postcode, toPostcode: toPlace?.postcode } satisfies Saved));
+      localStorage.setItem(SAVE_KEY, JSON.stringify({ from, to, time, via: chosenVia || undefined, fromPostcode: fromPlace?.postcode, toPostcode: toPlace?.postcode } satisfies Saved));
     } catch {}
-  }, [from, to, time, fromPlace, toPlace, pathname, router]);
+  }, [from, to, time, chosenVia, fromPlace, toPlace, pathname, router]);
 
-  const [hours, mins] = time.split(":").map(Number);
-  const slot = timeToSlot(hours || 0, mins || 0);
-  const legs = useMemo(() => (links && from !== to ? plan(links, from, to, slot) : null), [links, from, to, slot]);
-  const choices = useMemo(() => (links && from !== to ? routeChoices(links, from, to, slot).map(toRoute) : []), [links, from, to, slot]);
   const names = useMemo(() => Object.keys(stations), [stations]);
   const lines = legs ? [...new Set(legs.map((leg) => leg.line))].sort().join(",") : "";
   const status = loadedStatus?.lines === lines ? loadedStatus.status : null;
@@ -222,7 +233,7 @@ export function Planner() {
     if (!links || from === to) return null;
     return [-3, -2, -1, 0, 1, 2, 3].map((offset) => {
       const s = (slot + offset + SLOTS) % SLOTS;
-      const route = plan(links, from, to, s);
+      const route = (usual && followRoute(links, usual, s)) || plan(links, from, to, s);
       const trips = route?.map((leg) => journey(leg.links, legSlot(s, leg), TRAINS[leg.line])) ?? [];
       return {
         slot: s,
@@ -230,7 +241,7 @@ export function Planner() {
         fullDoors: route ? route.some((leg, i) => hardToBoard(trips[i].people, TRAINS[leg.line])) : false,
       };
     });
-  }, [links, from, to, slot]);
+  }, [links, from, to, slot, usual]);
   const ways = useMemo(
     () =>
       links && legs && stations[from] && stations[to]
@@ -338,6 +349,7 @@ export function Planner() {
           </Message>
         ) : (
           <>
+            {choices.length > 1 && <RoutePicker choices={choices} chosen={legs} onPick={(c) => setVia(c === choices[0] ? "" : changesOf(c))} />}
             <JourneyCard
               status={status}
               nearby={nearby}
@@ -348,7 +360,7 @@ export function Planner() {
               doorMinutes={fromPlace || toPlace ? (ways?.find((o) => o.kind === "tube")?.minutes ?? null) : null}
               from={from}
             />
-            <Alerts from={from} to={to} time={time} routes={choices} />
+            <Alerts from={from} to={to} time={time} route={usual!} onUsual={(route) => setVia(route.slice(1).map((leg) => leg.from).join(","))} />
             {ways && <Options list={ways} liveBikes={docks !== null} />}
             <TrainChart
               people={legs[0].links[0].perTrain}
@@ -381,6 +393,31 @@ function StationField(props: { id: string; label: string; value: string; onChang
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
+    </div>
+  );
+}
+
+/** The stations you change at, which tell one route from another: "Stockwell". */
+const changesOf = (legs: Leg[]) => legs.slice(1).map((leg) => leg.links[0].from).join(",");
+
+function RoutePicker({ choices, chosen, onPick }: { choices: Leg[][]; chosen: Leg[]; onPick: (legs: Leg[]) => void }) {
+  return (
+    <div className="space-y-2">
+      <p className="text-sm font-medium">Your usual way</p>
+      <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Your usual way">
+        {choices.map((c) => (
+          <button
+            key={routeName(toRoute(c))}
+            type="button"
+            role="radio"
+            aria-checked={c === chosen}
+            onClick={() => onPick(c)}
+            className={`rounded-full border px-3 py-1.5 text-sm ${c === chosen ? "border-foreground bg-foreground text-background" : "bg-card hover:bg-muted"}`}
+          >
+            {routeName(toRoute(c))}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

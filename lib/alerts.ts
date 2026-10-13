@@ -140,7 +140,9 @@ function calmerTime(links: Link[], commute: Commute, slot: number, crowd: Overal
  * TfL's live status for the lines on the route. Kept short: what's wrong and what to do about it.
  */
 export function compose(commute: Commute, links: Link[], status: LineStatus[], { force = false } = {}): Alert | null {
-  const url = `/?${new URLSearchParams({ from: commute.from, to: commute.to, time: commute.time })}`;
+  const query = new URLSearchParams({ from: commute.from, to: commute.to, time: commute.time });
+  if (commute.route && commute.route.length > 1) query.set("via", commute.route.slice(1).map((leg) => leg.from).join(","));
+  const url = `/?${query}`;
   const slot = timeToSlot(...(commute.time.split(":").map(Number) as [number, number]));
   const legs = legsFor(links, commute, slot);
   if (!legs) return force ? { title: "No route at your usual time", body: `No trains from ${commute.from} to ${commute.to} at ${commute.time}.`, url } : null;
