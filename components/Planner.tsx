@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeftRight, CircleCheck, Clock, Lightbulb, TrainFront, TriangleAlert } from "lucide-react";
 
+import { Alerts } from "@/components/Alerts";
 import { Options } from "@/components/Options";
 import { PostcodeField } from "@/components/PostcodeField";
 import { TrainChart } from "@/components/TrainChart";
@@ -344,6 +345,7 @@ export function Planner() {
               doorMinutes={fromPlace || toPlace ? (ways?.find((o) => o.kind === "tube")?.minutes ?? null) : null}
               from={from}
             />
+            <Alerts from={from} to={to} time={time} />
             {ways && <Options list={ways} liveBikes={docks !== null} />}
             <TrainChart
               people={legs[0].links[0].perTrain}
