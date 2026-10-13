@@ -12,4 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ vars.ALERTS_URL != '' }}
     steps:
-      - run: curl --fail --silent --show-error --max-time 60 -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" "${{ vars.ALERTS_URL }}"
+      - name: Send due alerts
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          ALERTS_URL: ${{ vars.ALERTS_URL }}
+        run: |
+          curl --fail --silent --show-error --max-time 60 -H "Authorization: Bearer $CRON_SECRET" "$ALERTS_URL"
