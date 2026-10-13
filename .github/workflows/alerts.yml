@@ -1,0 +1,15 @@
+name: Commute alerts
+
+# Asks the site to send any commute alerts that are due. GitHub can run scheduled jobs a few minutes
+# late, so alerts go out any time from 45 to 5 minutes before the leaving time.
+on:
+  schedule:
+    - cron: "*/5 4-22 * * *" # every 5 minutes, 04:00 to 22:55 UTC
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    if: ${{ vars.ALERTS_URL != '' }}
+    steps:
+      - run: curl --fail --silent --show-error --max-time 60 -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" "${{ vars.ALERTS_URL }}"

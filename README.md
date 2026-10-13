@@ -33,6 +33,8 @@ Capacity is TfL's crush figure: everyone standing, packed tight. In practice peo
 
 **For a regular commute.** The journey card shows TfL's live status for the lines on your route (with TfL's reason when there are delays), and a strip of the same trip leaving up to 45 minutes earlier or later, so you can see when you'd get a seat or avoid trains too full to board. The page remembers your last journey on that device and opens straight to it.
 
+**Commute alerts.** Turn on alerts for a journey and the site can send a phone notification about 30 minutes before you leave, only when it matters: delays on your lines (from TfL's live status), or a nearby time that's clearly calmer. At most one a day; "also on good days" adds a daily summary. It's an installable web app (a manifest and a service worker), so on iPhone it works once added to the home screen. A sign-up stores the browser's push subscription and the commute, nothing personal, in Upstash Redis. A GitHub Actions schedule (`.github/workflows/alerts.yml`) calls `/api/alerts/run` every five minutes with a secret; the decision of what to send is in `lib/alerts.ts` and tested on its own.
+
 **Journey time.** From TfL's Journey Planner, station to station. If it's unavailable, the page falls back to a rough estimate (2 minutes a stop, 5 a change).
 
 **Other ways to do it** (`lib/options.ts`). The planner also tries:
@@ -93,6 +95,9 @@ lib/tfl.ts                Server-side calls to TfL, cached
 app/api/live/route.ts     TfL's journey time between two stations
 app/api/docks/route.ts    Live Santander Cycles docks
 app/api/status/route.ts   Live status of the lines on a journey
+app/api/alerts/           Alert sign-ups, test notifications, and the scheduled check
+lib/alerts.ts             Whether an alert is due and what it says (no I/O)
+public/sw.js              Service worker: shows alerts, opens the journey when tapped
 components/Planner.tsx    The planner
 components/Options.tsx    Other ways to do it
 components/PostcodeField.tsx  Starting or ending at a postcode
