@@ -232,7 +232,15 @@ export function Alerts({ from, to, time, route, onUsual }: { from: string; to: s
               {current ? `Update ${from} to ${to}` : `Alert me for the ${time} ${from} to ${to}`}
             </Button>
             {full && <p className="text-sm text-muted-foreground">You have alerts for {MAX_COMMUTES} journeys. Remove one to add this.</p>}
-            {!saved && <p className="text-sm text-muted-foreground">Allow notifications when asked, then send a test to check they arrive.</p>}
+            {!full && (
+              <p className="text-sm text-muted-foreground">
+                {!saved
+                  ? "Allow notifications when asked, then send a test to check they arrive. Alerts are saved on this device."
+                  : current
+                    ? "To change this journey's time, days or route, set them above and tap Update. To add another, such as the way home, change the stations."
+                    : "To add another journey, such as the way home, change the stations or time above and tap Alert me."}
+              </p>
+            )}
           </>
         )}
         {message && (
