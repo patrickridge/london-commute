@@ -1,7 +1,8 @@
 name: Commute alerts
 
-# Asks the site to send any commute alerts that are due. GitHub can run scheduled jobs a few minutes
-# late, so alerts go out any time from 45 to 5 minutes before the leaving time.
+# A backup for the main scheduler (cron-job.org, see the README): asks the site to send any commute
+# alerts that are due. On a small repo GitHub runs this schedule only every few hours, so it can't be
+# relied on alone.
 on:
   schedule:
     - cron: "*/5 4-22 * * *" # every 5 minutes, 04:00 to 22:55 UTC
